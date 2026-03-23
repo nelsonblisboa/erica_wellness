@@ -445,9 +445,47 @@ img.stamp {
 
 .contact-card {
     background: var(--surface-lowest);
-    padding: 4rem;
+    padding: 3rem 4rem; /* Ajustado */
     border-radius: var(--radius-xl);
     box-shadow: var(--ambient-shadow);
+}
+
+.form-group {
+    margin-bottom: 1.5rem;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 0.6rem;
+    font-weight: 700;
+    font-size: 0.85rem;
+    color: var(--primary);
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+}
+
+.form-group input, .form-group textarea {
+    width: 100%;
+    padding: 1.2rem;
+    background: var(--surface-low);
+    border: 1px solid rgba(20, 30, 18, 0.1);
+    border-radius: var(--radius-default);
+    font-family: inherit;
+    font-size: 1rem;
+    color: var(--on-surface);
+    transition: var(--transition);
+}
+
+.form-group input:focus, .form-group textarea:focus {
+    outline: none;
+    border-color: var(--secondary);
+    background: var(--surface-lowest);
+    box-shadow: 0 0 0 4px rgba(114, 91, 50, 0.1);
+}
+
+.form-group textarea {
+    resize: vertical;
+    min-height: 120px;
 }
 
 /* MAP SECTION */
