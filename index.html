@@ -184,46 +184,137 @@
 
         <!-- Section: Contato (The Reservation) -->
         <section id="contato" class="section-padding">
-            <div class="container contact-layout">
+            <div class="container contact-grid">
                 <div class="contact-text">
-                    <span class="label-caps">Solicitação de Vaga</span>
+                    <span class="label-caps">Get In Touch</span>
                     <h2 class="display-md">Inicie sua <br>Transformação.</h2>
-                    <p style="margin-top: 2rem; font-size: 1.1rem; color: var(--primary);">Preencha seus dados para uma análise de disponibilidade. Nossa equipe entrará em contato em até 48h.</p>
+                    <p style="margin-top: 1.5rem; opacity: 0.8;">Reserve seu espaço para uma experiência de nutrição personalizada. Atendimentos presenciais e online.</p>
+                    
+                    <div class="contact-info-list">
+                        <div class="info-item">
+                            <i class="fa-solid fa-phone"></i>
+                            <label>Telefone</label>
+                            <span>+55 (11) 98765-4321</span>
+                        </div>
+                        <div class="info-item">
+                            <i class="fa-solid fa-envelope"></i>
+                            <label>E-mail</label>
+                            <span>contato@ericareis.com</span>
+                        </div>
+                        <div class="info-item">
+                            <i class="fa-solid fa-location-dot"></i>
+                            <label>Endereço</label>
+                            <span>Av. Paulista, 1000 - SP</span>
+                        </div>
+                        <div class="info-item">
+                            <i class="fa-brands fa-instagram"></i>
+                            <label>Instagram</label>
+                            <span>@ericareis.nutri</span>
+                        </div>
+                    </div>
+
+                    <div class="social-links" style="margin-top: 3rem; display: flex; gap: 1.5rem;">
+                        <span style="font-weight: 700; color: var(--primary);">Social Media</span>
+                        <a href="#" style="color: var(--primary);"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" style="color: var(--primary);"><i class="fab fa-twitter"></i></a>
+                        <a href="#" style="color: var(--primary);"><i class="fab fa-youtube"></i></a>
+                    </div>
                 </div>
-                <div class="contact-form-wrap">
+
+                <div class="contact-card">
                     <form class="contact-form">
-                        <div class="form-group">
-                            <input type="text" placeholder="Seu nome completo" required>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label style="display:block; margin-bottom:0.5rem; font-weight:700; font-size:0.8rem;">E-mail</label>
+                                <input type="email" placeholder="Seu e-mail" required>
+                            </div>
+                            <div class="form-group">
+                                <label style="display:block; margin-bottom:0.5rem; font-weight:700; font-size:0.8rem;">Nome</label>
+                                <input type="text" placeholder="Seu nome" required>
+                            </div>
                         </div>
-                        <div class="form-group">
-                            <input type="email" placeholder="Seu melhor e-mail" required>
+                        <div class="form-group" style="margin-top: 2rem;">
+                            <label style="display:block; margin-bottom:0.5rem; font-weight:700; font-size:0.8rem;">Telefone</label>
+                            <input type="tel" placeholder="Seu WhatsApp">
                         </div>
-                        <div class="form-group">
-                            <select required>
-                                <option value="" disabled selected>Objetivo Principal</option>
-                                <option value="emagrecer">Emagrecimento</option>
-                                <option value="hipertrofia">Ganho de Massa</option>
-                                <option value="saude">Saúde & Bem-estar</option>
-                            </select>
+                        <div class="form-group" style="margin-top: 2rem;">
+                            <label style="display:block; margin-bottom:0.5rem; font-weight:700; font-size:0.8rem;">Mensagem</label>
+                            <textarea rows="4" placeholder="Como podemos te ajudar?"></textarea>
                         </div>
-                        <div class="form-group">
-                            <textarea rows="3" placeholder="Conte-nos brevemente suas metas..."></textarea>
-                        </div>
-            <button type="submit" class="btn btn-primary" style="width: 100%; margin-top: 2rem;">Enviar Pedido de Reserva</button>
+                        <button type="submit" class="btn btn-primary" style="width: 100%; margin-top: 2rem;">ENVIAR SOLICITAÇÃO</button>
                     </form>
                 </div>
             </div>
         </section>
+
+        <!-- Section: Map -->
+        <section class="map-section">
+            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3657.197503816553!2d-46.6545163!3d-23.5613497!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x94ce59c8da1667d5%3A0x633190b0e9432657!2sAv.%20Paulista!5e0!3m2!1spt-BR!2sbr!4v1695420000000!5m2!1spt-BR!2sbr" allowfullscreen="" loading="lazy"></iframe>
+        </section>
     </main>
 
-    <!-- Footer -->
-    <footer style="padding: 5rem 0; border-top: none; background: var(--surface-high);">
-        <div class="container center">
-            <a href="#" class="logo"><img src="logo-circular.png" alt="Érica Reis Logo Circular" style="height: 100px; margin: 0 auto 1.5rem;"></a>
-            <p style="margin: 1.5rem 0; opacity: 0.7;">© 2024 Nutrição Premium. Todos os direitos reservados.</p>
-            <div class="social-links" style="display: flex; gap: 2rem; justify-content: center;">
-                <a href="#" style="color: var(--primary); font-size: 1.2rem;"><i class="fab fa-instagram"></i></a>
-                <a href="#" style="color: var(--primary); font-size: 1.2rem;"><i class="fab fa-linkedin"></i></a>
+    <!-- Footer (Advanced Editorial) -->
+    <footer class="main-footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <img src="logo-circular.png" alt="Logo" style="height: 80px; filter: brightness(0) invert(1);">
+                    <p>Dedicada a transformar vidas através de uma nutrição consciente, científica e profundamente humana.</p>
+                </div>
+                
+                <div class="footer-col">
+                    <h4>Navegação</h4>
+                    <ul class="footer-links">
+                        <li><a href="#home">Início</a></li>
+                        <li><a href="#sobre">Filosofia</a></li>
+                        <li><a href="#depoimentos">Depoimentos</a></li>
+                        <li><a href="#programas">Serviços</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-col">
+                    <h4>Quick Links</h4>
+                    <ul class="footer-links">
+                        <li><a href="#">Contato</a></li>
+                        <li><a href="#">FAQ's</a></li>
+                        <li><a href="#">Agendamento</a></li>
+                        <li><a href="#">Blog</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-col">
+                    <h4>Serviços</h4>
+                    <ul class="footer-links">
+                        <li><a href="#">Emagrecimento</a></li>
+                        <li><a href="#">Performance</a></li>
+                        <li><a href="#">Saúde Mental</a></li>
+                        <li><a href="#">Longevidade</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="footer-contact-bar">
+                <div class="contact-bar-item">
+                    <i class="fa-solid fa-location-dot"></i>
+                    <span>Av. Paulista, 1000 - São Paulo, SP</span>
+                </div>
+                <div class="contact-bar-item">
+                    <i class="fa-solid fa-phone"></i>
+                    <span>+55 (11) 98765-4321</span>
+                </div>
+                <div class="contact-bar-item">
+                    <i class="fa-solid fa-envelope"></i>
+                    <span>contato@ericareis.com</span>
+                </div>
+                <div class="footer-socials" style="display: flex; gap: 1.5rem;">
+                    <a href="#" style="color:white;"><i class="fab fa-facebook"></i></a>
+                    <a href="#" style="color:white;"><i class="fab fa-instagram"></i></a>
+                    <a href="#" style="color:white;"><i class="fab fa-youtube"></i></a>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <p>© 2024 Érica Reis Nutricionista. Todos os direitos reservados. Design by Editorial Organicism.</p>
             </div>
         </div>
     </footer>
