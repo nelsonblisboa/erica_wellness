@@ -344,16 +344,22 @@ header.scrolled .header-actions .btn {
     color: var(--secondary);
 }
 
-.stamp {
+img.stamp {
     position: absolute;
-    bottom: -20px;
-    right: -20px;
-    width: 120px;
-    height: 120px;
-    opacity: 0.15;
+    bottom: -30px;
+    right: -30px;
+    width: 180px !important;
+    height: 180px !important;
+    opacity: 0.1;
     transform: rotate(-15deg);
     pointer-events: none;
-    filter: sepia(100%) hue-rotate(30deg) saturate(200%); /* Efeito carimbo tinta */
+    filter: sepia(100%) hue-rotate(20deg) saturate(150%); /* Efeito carimbo tinta envelhecida */
+    transition: var(--transition);
+}
+
+.testimonial-card:hover img.stamp {
+    opacity: 0.2;
+    transform: rotate(-10deg) scale(1.1);
 }
 
 /* CONTACT FORM (Minimalist) */
