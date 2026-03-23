@@ -114,14 +114,15 @@ header {
     top: 0;
     width: 100%;
     z-index: 1000;
-    padding: 2rem 0;
+    padding: 3rem 0; /* Maior no topo */
     transition: var(--transition);
 }
 
 header.scrolled {
-    padding: 1.2rem 0;
+    padding: 1rem 0; /* Menor ao rolar */
     background: var(--glass-bg);
     backdrop-filter: blur(var(--glass-blur));
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.05);
 }
 
 nav {
@@ -131,13 +132,19 @@ nav {
 }
 
 .logo img {
-    height: 70px;
+    height: 90px;
     width: auto;
     display: block;
+    transition: var(--transition);
+}
+
+header.scrolled .logo img {
+    height: 55px;
 }
 
 @media (max-width: 768px) {
-    .logo img { height: 50px; }
+    .logo img { height: 60px; }
+    header.scrolled .logo img { height: 45px; }
 }
 
 .nav-links {
@@ -150,13 +157,31 @@ nav {
     text-decoration: none;
     color: var(--on-surface);
     font-weight: 500;
-    font-size: 0.9rem;
+    font-size: 1.1rem; /* Maior no topo */
     transition: var(--transition);
+}
+
+header.scrolled .nav-links a {
+    font-size: 0.9rem;
 }
 
 .nav-links a:hover { color: var(--secondary); }
 
-.header-actions { display: flex; align-items: center; gap: 2rem; }
+.header-actions {
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+}
+
+.header-actions .btn {
+    padding: 1rem 2rem;
+    font-size: 1rem;
+}
+
+header.scrolled .header-actions .btn {
+    padding: 0.7rem 1.5rem;
+    font-size: 0.85rem;
+}
 
 /* ARCHED FRAMES */
 .arched-frame {
