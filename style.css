@@ -300,66 +300,103 @@ header.scrolled .header-actions .btn {
     margin-bottom: 2rem;
 }
 
-/* DEPOIMENTOS */
+/* DEPOIMENTOS (NEW LAYOUT) */
 .testimonials-grid {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 4rem;
+    grid-template-columns: repeat(2, 1fr); /* 2 colunas como sugerido */
+    gap: 2.5rem;
 }
 
 .testimonial-card {
     background: var(--surface-lowest);
-    padding: 3rem;
+    padding: 2.5rem;
     border-radius: var(--radius-xl);
     position: relative;
     overflow: hidden;
     transition: var(--transition);
-    text-align: center;
+    border: 1px solid rgba(20, 30, 18, 0.05);
+    text-align: left; /* Alinhamento à esquerda conforme imagem */
 }
 
 .testimonial-card:hover { transform: translateY(-5px); }
 
+.testimonial-header {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    margin-bottom: 2rem;
+}
+
 .testimonial-photo {
-    width: 100px;
-    height: 100px;
+    width: 80px;
+    height: 80px;
     border-radius: 50%;
-    margin: 0 auto 1.5rem;
     overflow: hidden;
     object-fit: cover;
-    border: 3px solid var(--surface-high);
+    flex-shrink: 0;
+    border: 2px solid var(--surface-high);
+}
+
+.testimonial-meta { flex-grow: 1; }
+
+.testimonial-author {
+    font-family: 'Noto Serif', serif;
+    font-weight: 700;
+    font-size: 1.1rem;
+    color: var(--primary);
+    margin-bottom: 0.2rem;
+}
+
+.testimonial-job {
+    font-size: 0.8rem;
+    color: var(--secondary);
+    opacity: 0.8;
+    margin-bottom: 0.5rem;
+    display: block;
+}
+
+.testimonial-stars {
+    color: #ffb400; /* Cor ouro para as estrelas */
+    font-size: 0.8rem;
+    display: flex;
+    gap: 3px;
 }
 
 .testimonial-quote {
-    font-family: 'Noto Serif', serif;
-    font-style: italic;
-    font-size: 1.1rem;
-    color: var(--primary);
-    margin-bottom: 1.5rem;
-    line-height: 1.6;
+    font-family: 'Manrope', sans-serif;
+    font-size: 1rem;
+    color: var(--on-surface);
+    opacity: 0.9;
+    line-height: 1.7;
+    position: relative;
+    z-index: 2;
 }
 
-.testimonial-author {
-    font-weight: 700;
-    font-size: 0.9rem;
+.quote-icon {
+    position: absolute;
+    top: 2rem;
+    right: 2rem;
+    font-size: 2.5rem;
     color: var(--secondary);
+    opacity: 0.1;
 }
 
 img.stamp {
     position: absolute;
-    bottom: -30px;
-    right: -30px;
-    width: 180px !important;
-    height: 180px !important;
-    opacity: 0.1;
+    bottom: -20px;
+    right: -20px;
+    width: 140px !important;
+    height: 140px !important;
+    opacity: 0.08;
     transform: rotate(-15deg);
     pointer-events: none;
-    filter: sepia(100%) hue-rotate(20deg) saturate(150%); /* Efeito carimbo tinta envelhecida */
+    filter: sepia(100%) hue-rotate(20deg) saturate(150%);
     transition: var(--transition);
+    z-index: 1;
 }
 
-.testimonial-card:hover img.stamp {
-    opacity: 0.2;
-    transform: rotate(-10deg) scale(1.1);
+@media (max-width: 1024px) {
+    .testimonials-grid { grid-template-columns: 1fr; }
 }
 
 /* CONTACT FORM (Minimalist) */
