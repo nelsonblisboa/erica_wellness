@@ -23,11 +23,11 @@
     --glass-bg: rgba(212, 225, 205, 0.6);
     --glass-blur: 20px;
     
-    /* Spacing & Rhythm (8px based) */
-    --gap-section: 8.5rem; /* Gap 24 */
-    --gap-group: 2rem;    /* Gap 6 */
-    --gap-text: 1rem;     /* Gap 3 */
-    --page-margin: 7rem;  /* Spacing 20 */
+    /* Spacing & Rhythm (Compressão) */
+    --gap-section: 4rem; /* Reduzido de 8.5rem */
+    --gap-group: 1.5rem; /* Reduzido de 2rem */
+    --gap-text: 0.8rem;  /* Reduzido de 1rem */
+    --page-margin: 4.5rem; /* Reduzido de 7rem */
 
     /* Radii */
     --radius-default: 1rem;
@@ -114,7 +114,7 @@ header {
     top: 0;
     width: 100%;
     z-index: 1000;
-    padding: 1.5rem 0 3.5rem; /* Reduzido no topo para aproximar da borda */
+    padding: 1rem 0 2.5rem; /* Comprimido */
     transition: var(--transition);
 }
 
@@ -240,10 +240,10 @@ header.scrolled .header-actions .btn {
 
 /* HERO */
 .hero {
-    min-height: 100vh;
+    min-height: 80vh; /* Reduzido para aproximar o conteúdo do topo */
     display: flex;
     align-items: center;
-    padding-top: 15vh;
+    padding-top: 10vh;
 }
 
 .hero-content {
@@ -471,15 +471,15 @@ img.stamp {
 .main-footer {
     background: var(--primary);
     color: var(--on-primary);
-    padding: 8rem 0 3rem;
+    padding: 4rem 0 2rem; /* Mais compacto */
     position: relative;
 }
 
 .footer-grid {
     display: grid;
     grid-template-columns: 1.5fr 1fr 1fr 1fr;
-    gap: 5rem;
-    margin-bottom: 5rem;
+    gap: 3rem;
+    margin-bottom: 3rem;
 }
 
 .footer-brand p {
