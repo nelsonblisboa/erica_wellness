@@ -240,20 +240,24 @@ header.scrolled .header-actions .btn {
 
 /* HERO */
 .hero {
-    min-height: 80vh; /* Reduzido para aproximar o conteúdo do topo */
+    min-height: 70vh; /* Reduzido de 80vh */
     display: flex;
     align-items: center;
-    padding-top: 10vh;
+    padding-top: 5vh; /* Aproximado do topo */
 }
 
 .hero-content {
     display: grid;
-    grid-template-columns: 1.1fr 0.9fr;
-    gap: 100px;
+    grid-template-columns: 1.3fr 0.7fr; /* Texto ganha mais espaço, imagem diminui */
+    gap: 120px;
     align-items: center;
 }
 
-.hero-text { position: relative; z-index: 2; }
+.hero-text { 
+    position: relative; 
+    z-index: 2; 
+    transform: translateY(-20px); /* Sobe o texto suavemente */
+}
 
 /* Overlapping effect */
 .hero-image-wrap {
