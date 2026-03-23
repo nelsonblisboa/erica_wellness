@@ -300,6 +300,62 @@ header.scrolled .header-actions .btn {
     margin-bottom: 2rem;
 }
 
+/* DEPOIMENTOS */
+.testimonials-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 4rem;
+}
+
+.testimonial-card {
+    background: var(--surface-lowest);
+    padding: 3rem;
+    border-radius: var(--radius-xl);
+    position: relative;
+    overflow: hidden;
+    transition: var(--transition);
+    text-align: center;
+}
+
+.testimonial-card:hover { transform: translateY(-5px); }
+
+.testimonial-photo {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    margin: 0 auto 1.5rem;
+    overflow: hidden;
+    object-fit: cover;
+    border: 3px solid var(--surface-high);
+}
+
+.testimonial-quote {
+    font-family: 'Noto Serif', serif;
+    font-style: italic;
+    font-size: 1.1rem;
+    color: var(--primary);
+    margin-bottom: 1.5rem;
+    line-height: 1.6;
+}
+
+.testimonial-author {
+    font-weight: 700;
+    font-size: 0.9rem;
+    color: var(--secondary);
+}
+
+.stamp {
+    position: absolute;
+    bottom: -20px;
+    right: -20px;
+    width: 120px;
+    height: 120px;
+    opacity: 0.15;
+    transform: rotate(-15deg);
+    pointer-events: none;
+    filter: sepia(100%) hue-rotate(30deg) saturate(200%); /* Efeito carimbo tinta */
+}
+
 /* CONTACT FORM (Minimalist) */
 .contact-layout {
     display: grid;
