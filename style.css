@@ -114,12 +114,12 @@ header {
     top: 0;
     width: 100%;
     z-index: 1000;
-    padding: 3rem 0; /* Maior no topo */
+    padding: 1.5rem 0 3.5rem; /* Reduzido no topo para aproximar da borda */
     transition: var(--transition);
 }
 
 header.scrolled {
-    padding: 1rem 0; /* Menor ao rolar */
+    padding: 0.8rem 0;
     background: var(--glass-bg);
     backdrop-filter: blur(var(--glass-blur));
     box-shadow: 0 4px 30px rgba(0, 0, 0, 0.05);
