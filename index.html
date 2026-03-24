@@ -69,7 +69,7 @@
                 <ul class="nav-links">
                     <li><a href="#home">Início</a></li>
                     <li><a href="#sobre">Filosofia</a></li>
-                    <li><a href="#programas">Bespoke</a></li>
+                    <li><a href="#programas">Sob Medida</a></li>
                     <li><a href="#blog">Editorial</a></li>
                     <li><a href="#contato">Reserva</a></li>
                 </ul>
@@ -86,7 +86,7 @@
         <section id="home" class="hero section-padding">
             <div class="container hero-content">
                 <div class="hero-text">
-                    <span class="label-caps">The Living Editorial</span>
+                    <span class="label-caps">Editorial de Vida</span>
                     <h1 class="display-lg">Nutrição que cura, inspira e transforma.</h1>
                     <p class="brand-voice" style="font-size: 1.4rem; color: var(--primary); margin-bottom: 3rem;">Onde a ciência encontra a essência do bem-estar.</p>
                     <div class="hero-btns">
@@ -128,12 +128,12 @@
             <div class="container">
                 <div class="section-header center" style="margin-bottom: var(--gap-section);">
                     <span class="label-caps">Experiências</span>
-                    <h2 class="display-md">Programas Bespoke</h2>
+                    <h2 class="display-md">Planos Sob Medida</h2>
                 </div>
                 <div class="programs-grid">
                     <article class="program-card">
                         <i class="fa-solid fa-plate-wheat program-icon" aria-hidden="true"></i>
-                        <h3 class="brand-voice">Emagrecimento Consciente em SP</h3>
+                        <h3 class="brand-voice">Emagrecimento Consciente</h3>
                         <p>Ritmos metabólicos alinhados à sua biologia única para perda de peso sustentável.</p>
                         <a href="https://wa.me/5511987654321" class="btn btn-outline" style="padding: 0.8rem 1.5rem; margin-top: 1rem;">Reservar Consulta</a>
                     </article>
@@ -153,39 +153,67 @@
             </div>
         </section>
 
-        <!-- Section: Lead Magnet (Material Exclusivo) -->
-        <section id="lead-magnet" class="container">
-            <div class="lead-magnet">
-                <div class="lead-image" style="display: flex; justify-content: center;">
-                    <img src="ebook.png" alt="Guia Exclusivo Nutrição & Longevidade por Dra. Érica Reis">
-                </div>
-                <div class="lead-info">
-                    <span class="label-caps">Material Exclusivo</span>
-                    <h2 class="display-md" style="margin-bottom: 2rem;">Segredos da <br>Longevidade.</h2>
-                    <p style="margin-bottom: 2.5rem; opacity: 0.9;">Baixe meu guia completo sobre Biohacking e Nutrição de Precisão. Descubra como ajustar sua biologia para o máximo desempenho e clareza mental.</p>
-                    
-                    <div class="lead-form-wrap">
-                        <form class="contact-form">
-                            <div class="form-group">
-                                <label>Nome Completo</label>
-                                <input type="text" placeholder="Seu nome" required>
-                            </div>
-                            <div class="form-row">
-                                <div class="form-group">
-                                    <label>E-mail</label>
-                                    <input type="email" placeholder="seu@email.com" required>
-                                </div>
-                                <div class="form-group">
-                                    <label>WhatsApp</label>
-                                    <input type="tel" placeholder="(11) 99999-9999" required>
-                                </div>
-                            </div>
-                            <button type="submit" class="btn btn-primary" style="width: 100%; margin-top: 1rem;">BAIXAR PDF AGORA</button>
-                        </form>
+        <!-- Section: Lead Magnet (Teaser + Modal) -->
+        <section id="download-ebook" class="section-padding download-section">
+            <div class="container" style="padding: 0 5vw;">
+                <div class="download-teaser">
+                    <div class="download-text">
+                        <span class="label-caps">Acesso Exclusivo</span>
+                        <h2 class="display-md" style="margin-bottom: 1.5rem;">Cientificamente Comprovado:<br>O Guia da Longevidade.</h2>
+                        <p style="margin-bottom: 2rem;">Reprograme sua biologia com o manual definitivo de Biohacking e Nutrição de Precisão da Dra. Érica Reis.</p>
+                        <ul class="benefit-list">
+                            <li><i class="fa-solid fa-check"></i> Ciclo circadiano e queima de gordura otimizada</li>
+                            <li><i class="fa-solid fa-check"></i> Protocolos de jejum consciente para clareza mental</li>
+                            <li><i class="fa-solid fa-check"></i> Guia básico de suplementação estratégica</li>
+                        </ul>
+                        <button class="btn btn-primary open-modal-btn">
+                            BAIXAR PDF GRATUITO AGORA 
+                            <i class="fa-solid fa-arrow-right" style="margin-left: 0.8rem;"></i>
+                        </button>
+                        <p class="scarcity-text"><i class="fa-solid fa-fire"></i> Mais de 1.400 downloads realizados esta semana.</p>
+                    </div>
+                    <div class="download-preview">
+                        <img src="ebook.png" alt="Ebook Nutrição e Longevidade">
                     </div>
                 </div>
             </div>
         </section>
+
+        <!-- Modal PDF -->
+        <div id="pdf-modal" class="modal">
+            <div class="modal-overlay"></div>
+            <div class="modal-content">
+                <button class="modal-close">&times;</button>
+                <div class="modal-header">
+                    <h3>Quase lá!</h3>
+                    <p>Insira seus dados para liberar o link de download instantâneo.</p>
+                </div>
+                <form class="lead-form" id="main-lead-form">
+                    <div class="form-group">
+                        <label>Nome Completo</label>
+                        <input type="text" name="nome" placeholder="Seu nome" required>
+                        <span class="error-msg">Por favor, insira seu nome completo.</span>
+                    </div>
+                    <div class="form-group">
+                        <label>E-mail Principal</label>
+                        <input type="email" name="email" placeholder="seu@email.com" required>
+                        <span class="error-msg">Insira um e-mail válido.</span>
+                    </div>
+                    <div class="form-group">
+                        <label>WhatsApp (com DDD)</label>
+                        <input type="tel" name="whatsapp" placeholder="(11) 99999-9999" required>
+                        <span class="error-msg">Insira um número válido (ex: 11 99999-9999).</span>
+                    </div>
+                    <button type="submit" class="btn btn-primary" style="width: 100%; margin-top: 1rem;">LIBERAR ACESSO IMEDIATAMENTE</button>
+                    <p class="privacy-note">🔒 Seus dados estão protegidos e não serão compartilhados.</p>
+                </form>
+                <div class="success-message" style="display: none;">
+                    <i class="fa-solid fa-circle-check"></i>
+                    <h3>Verifique seu E-mail!</h3>
+                    <p>O guia foi enviado. Caso não encontre, veja na pasta de Promoções ou Spam.</p>
+                </div>
+            </div>
+        </div>
 
         <!-- Section: Depoimentos (Editorial Reviews) -->
         <section id="depoimentos" class="section-padding about">
@@ -270,45 +298,45 @@
             <div class="container">
                 <div class="section-header" style="margin-bottom: var(--gap-section); display: flex; justify-content: space-between; align-items: flex-end;">
                     <div>
-                        <span class="label-caps">Notas Editoriais</span>
-                        <h2 class="display-md">Manifestos de<br>Bem-Estar.</h2>
+                        <span class="label-caps">Conteúdo & Ciência</span>
+                        <h2 class="display-md">Vida em <br>Equilíbrio.</h2>
                     </div>
-                    <a href="#" class="btn btn-outline" style="margin-bottom: 1rem;">Ver todos os manifestos</a>
+                    <a href="#" class="btn btn-outline" style="margin-bottom: 1rem;">Explorar todos os artigos</a>
                 </div>
 
                 <div class="blog-grid">
                     <article class="blog-card">
                         <div class="blog-image">
+                            <span class="category-tag">Nutrição de Precisão</span>
                             <img src="hero.png" alt="Biohacking e Nutrição de Precisão">
                         </div>
                         <div class="blog-content">
-                            <span class="label-caps" style="font-size: 0.7rem; color: var(--secondary); margin-bottom: 0.5rem;">Cortesía de Biohacking</span>
-                            <h3>O ritmo circadiano como seu principal aliado metabólico.</h3>
-                            <p>Como a luz solar e o horário das refeições ditam sua queima de gordura.</p>
+                            <h3>Como a genética e a dieta moldam sua longevidade.</h3>
+                            <p>Entenda por que alimentos "saudáveis" podem não estar funcionando para o seu tipo metabólico único.</p>
                             <a href="#" style="font-weight: 700; color: var(--primary); text-decoration: none; font-size: 0.9rem;">Continuar lendo <i class="fa-solid fa-arrow-right" style="margin-left: 0.5rem; font-size: 0.8rem;"></i></a>
                         </div>
                     </article>
 
                     <article class="blog-card">
                         <div class="blog-image">
+                            <span class="category-tag">Emagrecimento</span>
                             <img src="erica.png" alt="O poder dos Micronutrientes">
                         </div>
                         <div class="blog-content">
-                            <span class="label-caps" style="font-size: 0.7rem; color: var(--secondary); margin-bottom: 0.5rem;">Ciência Pura</span>
-                            <h3>Magnésio: O maestro silencioso de 300 reações.</h3>
-                            <p>Por que a deficiência deste mineral é a mais comum e perigosa em executivos.</p>
+                            <h3>O fim das dietas restritivas e o início da liberdade.</h3>
+                            <p>A ciência por trás do emagrecimento que não agride o metabolismo e respeita sua biologia.</p>
                             <a href="#" style="font-weight: 700; color: var(--primary); text-decoration: none; font-size: 0.9rem;">Continuar lendo <i class="fa-solid fa-arrow-right" style="margin-left: 0.5rem; font-size: 0.8rem;"></i></a>
                         </div>
                     </article>
 
                     <article class="blog-card">
                         <div class="blog-image">
+                            <span class="category-tag">Receitas</span>
                             <img src="hero.png" alt="Foco e Performance Mental">
                         </div>
                         <div class="blog-content">
-                            <span class="label-caps" style="font-size: 0.7rem; color: var(--secondary); margin-bottom: 0.5rem;">Alta Performance</span>
-                            <h3>Nutrição para o Cérebro: Além do café matinal.</h3>
-                            <p>Estratégias alimentares para manter o foco inabalável durante reuniões intensas.</p>
+                            <h3>5 Cafés da manhã para turbinar seu foco cognitivo.</h3>
+                            <p>Refeições práticas e ricas em gorduras boas para manter o cérebro afiado desde a primeira hora.</p>
                             <a href="#" style="font-weight: 700; color: var(--primary); text-decoration: none; font-size: 0.9rem;">Continuar lendo <i class="fa-solid fa-arrow-right" style="margin-left: 0.5rem; font-size: 0.8rem;"></i></a>
                         </div>
                     </article>
@@ -320,7 +348,7 @@
         <section id="contato" class="section-padding">
             <div class="container contact-grid">
                 <div class="contact-text">
-                    <span class="label-caps">Get In Touch</span>
+                    <span class="label-caps">Agende Agora</span>
                     <h2 class="display-md">Inicie sua <br>Transformação.</h2>
                     <p style="margin-top: 1.5rem; opacity: 0.8;">Reserve seu espaço para uma experiência de nutrição personalizada. Atendimentos presenciais e online.</p>
                     
@@ -348,7 +376,7 @@
                     </div>
 
                     <div class="social-links" style="margin-top: 3rem; display: flex; gap: 1.5rem;">
-                        <span style="font-weight: 700; color: var(--primary);">Social Media</span>
+                        <span style="font-weight: 700; color: var(--primary);">Nossas Redes</span>
                         <a href="#" style="color: var(--primary);"><i class="fab fa-facebook-f"></i></a>
                         <a href="#" style="color: var(--primary);"><i class="fab fa-twitter"></i></a>
                         <a href="#" style="color: var(--primary);"><i class="fab fa-youtube"></i></a>
@@ -407,22 +435,22 @@
                 </div>
 
                 <div class="footer-col">
-                    <h4>Quick Links</h4>
+                    <h4>Links Rápidos</h4>
                     <ul class="footer-links">
                         <li><a href="#">Contato</a></li>
-                        <li><a href="#">FAQ's</a></li>
+                        <li><a href="#">Dúvidas</a></li>
                         <li><a href="#">Agendamento</a></li>
                         <li><a href="#">Blog</a></li>
                     </ul>
                 </div>
 
                 <div class="footer-col">
-                    <h4>Serviços</h4>
+                    <h4>Categorias</h4>
                     <ul class="footer-links">
+                        <li><a href="#">Nutrição</a></li>
+                        <li><a href="#">Receitas Saudáveis</a></li>
                         <li><a href="#">Emagrecimento</a></li>
-                        <li><a href="#">Performance</a></li>
-                        <li><a href="#">Saúde Mental</a></li>
-                        <li><a href="#">Longevidade</a></li>
+                        <li><a href="#">Mente & Emoções</a></li>
                     </ul>
                 </div>
             </div>
@@ -448,7 +476,7 @@
             </div>
 
             <div class="footer-bottom">
-                <p>© 2024 Érica Reis Nutricionista. Todos os direitos reservados. Design by Editorial Organicism.</p>
+                <p>© 2024 Érica Reis Nutricionista. Todos os direitos reservados. Design por Editorial Orgânico.</p>
             </div>
         </div>
     </footer>

@@ -1,6 +1,5 @@
 /* 
-   THE DESIGN SYSTEM: Editorial Organicism
-   Theme Name: "The Living Editorial"
+   Nome do Tema: "Editorial Vivo"
 */
 
 @import url('https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Noto+Serif:ital,wght@0,400;0,700;1,400;1,700&display=swap');
@@ -281,7 +280,7 @@ header.scrolled .header-actions .btn {
     align-items: center;
 }
 
-/* PROGRAMS (Bespoke Cards) */
+/* PLANOS (Cards Sob Medida) */
 .programs-grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
@@ -588,14 +587,7 @@ img.stamp {
     opacity: 0.5;
 }
 
-/* RESPONSIVITY */
-@media (max-width: 1280px) {
-    :root { --page-margin: 4rem; }
-    .hero-image-wrap { margin-left: 0; }
-    .footer-grid { gap: 3rem; }
-}
-
-/* BLOG (NOTAS EDITORIAIS) */
+/* BLOG (VIDA EM EQUILÍBRIO) */
 .blog-grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
@@ -612,6 +604,22 @@ img.stamp {
     border-radius: var(--radius-default);
     overflow: hidden;
     margin-bottom: 1.5rem;
+    position: relative;
+}
+
+.category-tag {
+    position: absolute;
+    top: 1rem;
+    left: 1rem;
+    background: var(--surface-lowest);
+    color: var(--primary);
+    padding: 0.4rem 1rem;
+    border-radius: var(--radius-pill);
+    font-size: 0.65rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
 }
 
 .blog-image img {
@@ -622,7 +630,7 @@ img.stamp {
 
 .blog-content h3 {
     font-family: 'Noto Serif', serif;
-    font-size: 1.2rem;
+    font-size: 1.25rem;
     color: var(--primary);
     margin-bottom: 1rem;
     line-height: 1.4;
@@ -634,42 +642,207 @@ img.stamp {
     margin-bottom: 1.5rem;
 }
 
-/* LEAD MAGNET */
-.lead-magnet {
+/* EDITORIAL COMPONENTS */
+.nutri-tip-box {
     background: var(--surface-high);
-    border-radius: var(--radius-xl);
-    padding: 5rem;
-    margin: 5rem 0;
+    border-left: 4px solid var(--secondary);
+    padding: 2rem;
+    border-radius: 0 var(--radius-default) var(--radius-default) 0;
+    margin: 2rem 0;
+    display: flex;
+    gap: 1.5rem;
+    align-items: flex-start;
+}
+
+.nutri-tip-box i {
+    font-size: 1.5rem;
+    color: var(--secondary);
+    margin-top: 0.2rem;
+}
+
+.nutri-tip-title {
+    font-family: 'Noto Serif', serif;
+    font-weight: 700;
+    font-size: 1.1rem;
+    color: var(--primary);
+    margin-bottom: 0.5rem;
+    display: block;
+}
+
+/* DOWNLOAD SECTION (TEASER) */
+.download-section {
+    background: var(--surface-low);
+    overflow: hidden;
+}
+
+.download-teaser {
     display: grid;
-    grid-template-columns: 0.8fr 1.2fr;
-    gap: 5vw;
+    grid-template-columns: 1.2fr 0.8fr;
+    gap: 5rem;
     align-items: center;
-}
-
-.lead-image img {
-    width: 100%;
-    max-width: 350px;
-    filter: drop-shadow(0 20px 40px rgba(0,0,0,0.15));
-}
-
-.lead-form-wrap {
     background: var(--surface-lowest);
-    padding: 3rem;
-    border-radius: var(--radius-default);
+    padding: 5rem;
+    border-radius: var(--radius-xl);
+    box-shadow: 0 40px 100px rgba(13, 54, 33, 0.08);
+}
+
+.benefit-list {
+    list-style: none;
+    margin: 2rem 0 3rem;
+}
+
+.benefit-list li {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 0.8rem;
+    font-weight: 500;
+    color: var(--primary);
+}
+
+.benefit-list i {
+    color: var(--secondary);
+    font-size: 0.9rem;
+}
+
+.scarcity-text {
+    margin-top: 1.5rem;
+    font-size: 0.85rem;
+    color: var(--secondary);
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-weight: 600;
+}
+
+.download-preview img {
+    width: 100%;
+    max-width: 400px;
+    filter: drop-shadow(0 30px 60px rgba(0,0,0,0.2));
+    transition: var(--transition);
+}
+
+.download-teaser:hover .download-preview img {
+    transform: translateY(-10px) rotate(-2deg);
+}
+
+/* MODAL SYSTEM */
+.modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 5000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    visibility: hidden;
+    opacity: 0;
+    transition: var(--transition);
+}
+
+.modal.active {
+    visibility: visible;
+    opacity: 1;
+}
+
+.modal-overlay {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: rgba(13, 54, 33, 0.8);
+    backdrop-filter: blur(10px);
+}
+
+.modal-content {
+    background: var(--surface-lowest);
+    padding: 4rem;
+    border-radius: var(--radius-xl);
+    width: 100%;
+    max-width: 550px;
+    position: relative;
+    z-index: 5001;
+    transform: translateY(30px);
+    transition: var(--transition);
+    box-shadow: 0 40px 100px rgba(0,0,0,0.3);
+}
+
+.modal.active .modal-content {
+    transform: translateY(0);
+}
+
+.modal-close {
+    position: absolute;
+    top: 1.5rem;
+    right: 2rem;
+    font-size: 2.5rem;
+    border: none;
+    background: none;
+    cursor: pointer;
+    color: var(--primary);
+    line-height: 1;
+}
+
+.modal-header {
+    text-align: center;
+    margin-bottom: 3rem;
+}
+
+.modal-header h3 {
+    font-size: 2rem;
+    margin-bottom: 0.5rem;
+}
+
+.modal-header p {
+    font-size: 0.95rem;
+    opacity: 0.8;
+}
+
+.privacy-note {
+    font-size: 0.75rem;
+    opacity: 0.6;
+    text-align: center;
+    margin-top: 1.5rem;
+}
+
+/* Form Validation Styles */
+.form-group.error input {
+    border-color: #ff4d4d;
+    background: #fffafa;
+}
+
+.error-msg {
+    color: #ff4d4d;
+    font-size: 0.75rem;
+    margin-top: 0.3rem;
+    display: none;
+}
+
+.form-group.error .error-msg {
+    display: block;
+}
+
+.success-message {
+    text-align: center;
+    padding: 2rem 0;
+}
+
+.success-message i {
+    font-size: 4rem;
+    color: #25d366;
+    margin-bottom: 1.5rem;
 }
 
 @media (max-width: 1024px) {
-    .container { padding: 0 2rem; }
-    .hero-content, .about-grid, .programs-grid, .contact-grid, .footer-grid {
+    .download-teaser {
         grid-template-columns: 1fr;
-        gap: 3rem;
-    }
-    .blog-grid { grid-template-columns: 1fr; }
-    .lead-magnet { 
-        grid-template-columns: 1fr; 
         padding: 3rem 2rem;
         text-align: center;
     }
+    .benefit-list li { justify-content: center; }
+    .scarcity-text { justify-content: center; }
+    .modal-content { padding: 3rem 2rem; margin: 0 1rem; }
 }
 
 @media (max-width: 768px) {
