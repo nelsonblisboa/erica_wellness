@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard | Dra. Érica Reis</title>
+    <link rel="stylesheet" href="../style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --bg-admin: #264D36; 
+            --surface-admin: #ffffff; 
+            --accent-admin: #9B8155;
+            --text-main: #141e12;
+            --text-muted: #6b7280;
+            --card-inner: #f9fbf8;
+        }
+
+        body {
+            background-color: var(--bg-admin);
+            margin: 0;
+            display: flex;
+            height: 100vh;
+            color: var(--text-main);
+            font-family: 'Manrope', sans-serif;
+            overflow: hidden;
+        }
+
+        /* Sidebar - Logo Centralizada, Comandos à Esquerda */
+        .sidebar {
+            width: 240px;
+            display: flex;
+            flex-direction: column;
+            padding: 1.5rem 0.5rem;
+            gap: 1rem;
+            flex-shrink: 0;
+            align-items: flex-start;
+        }
+
+        .sidebar .brand {
+            width: 100%;
+            padding: 0 0.5rem 2rem 0.5rem;
+            text-align: center;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            margin-bottom: 0.5rem;
+        }
+
+        .sidebar .brand img { width: 160px; height: auto; filter: brightness(0) invert(1); display: inline-block; }
+
+        .nav-menu {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            gap: 0.2rem;
+            flex-grow: 1;
+        }
+
+        .menu-label {
+            width: 100%;
+            font-size: 0.65rem;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            color: rgba(255, 255, 255, 0.25);
+            margin: 1.5rem 0 0.5rem 0.8rem;
+            font-weight: 800;
+            text-align: left;
+        }
+
+        .nav-link {
+            width: calc(100% - 1.6rem);
+            margin-left: 0.4rem;
+            display: flex;
+            align-items: center;
+            justify-content: flex-start;
+            gap: 1rem;
+            padding: 0.8rem 1rem;
+            color: rgba(255, 255, 255, 0.45);
+            text-decoration: none;
+            border-radius: 0.8rem;
+            transition: 0.2s;
+            font-weight: 600;
+            font-size: 0.88rem;
+        }
+
+        .nav-link i { font-size: 1.1rem; width: 24px; text-align: left; }
+        .nav-link:hover { color: white; background: rgba(255, 255, 255, 0.05); }
+        .nav-link.active { background: var(--accent-admin); color: white; box-shadow: 0 4px 12px rgba(0,0,0,0.1); }
+
+        .sidebar-bottom { width: 100%; border-top: 1px solid rgba(255, 255, 255, 0.05); padding-top: 1.5rem; margin-top: auto; }
+        .user-info { display: flex; align-items: center; gap: 0.8rem; color: white; padding-left: 0.8rem; text-decoration: none; }
+
+        /* Main Panel - Sincronizado */
+        .main-panel {
+            flex-grow: 1;
+            background: var(--surface-admin);
+            margin: 0.6rem 0.6rem 0.6rem 0;
+            border-radius: 2.8rem;
+            display: flex;
+            overflow: hidden;
+            box-shadow: 0 40px 100px rgba(0,0,0,0.3);
+        }
+
+        /* Área de Conteúdo Central - Layout de Máxima Proximidade */
+        .content-area {
+            flex-grow: 1;
+            padding: 2.5rem 3.5rem;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+            gap: 0; /* Gap zerado para permitir que os elementos encostem */
+        }
+
+        /* Cabeçalhos de Seção Padronizados - Colagem Estratégica */
+        .section-header { border-bottom: 2.2px solid #f0fde9; padding-bottom: 1.2rem; margin-bottom: 0.5rem; display: flex; flex-direction: column; gap: 0.4rem; align-items: flex-start; width: 100%; }
+        
+        /* Espaçamento apenas para a lista inferior */
+        .leads-list-compact { margin-top: 4rem; } 
+
+        .section-header h1, .section-header h2 { font-family: 'Noto Serif', serif; font-size: 1.8rem; margin: 0; color: var(--bg-admin); }
+        .section-header p { color: var(--text-muted); font-size: 0.75rem; margin: 0; text-transform: uppercase; letter-spacing: 1.8px; font-weight: 800; }
+
+        /* Grid de Estatísticas Com Mais Visibilidade */
+        .analytics-grid { display: grid; grid-template-columns: 2.8fr 1fr; gap: 2rem; align-items: flex-start; width: 100%; }
+
+        .chart-card {
+            background: #2a553c; /* Verde Floresta Profundo */
+            padding: 3rem; 
+            border-radius: 3rem;
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+            color: white; 
+            box-shadow: 0 20px 60px rgba(0,0,0,0.2);
+            min-height: 480px;
+        }
+
+        .chart-main-val { font-size: 3.2rem; font-weight: 800; font-family: 'Noto Serif'; color: #f9fbf8; margin: 1rem 0; display: flex; align-items: center; gap: 1.5rem; }
+        .chart-bars { height: 180px; display: flex; align-items: flex-end; justify-content: space-between; gap: 12px; padding-top: 2rem; }
+        .bar-expert { flex: 1; background: rgba(255,255,255,0.1); border-radius: 8px; transition: 0.4s; }
+        .bar-expert.primary { background: var(--accent-admin); }
+
+        .stats-side-grid { display: flex; flex-direction: column; gap: 2rem; }
+        .mini-card { background: #2a553c; padding: 2.5rem; border-radius: 2.8rem; display: flex; flex-direction: column; justify-content: center; align-items: flex-start; color: white; box-shadow: 0 20px 50px rgba(0,0,0,0.15); }
+        .mini-card h4 { font-size: 0.72rem; color: rgba(255,255,255,0.5); text-transform: uppercase; letter-spacing: 2px; margin: 0 0 1.2rem 0; font-weight: 800; }
+        .mini-card .val { font-size: 2.4rem; font-weight: 800; font-family: 'Noto Serif'; color: var(--accent-admin); }
+
+        /* Tabela Com Melhor Espaçamento */
+        .table-card { background: var(--card-inner); border-radius: 3rem; padding: 2.5rem; }
+        table { width: 100%; border-collapse: collapse; }
+        th { text-align: left; font-size: 0.75rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 1.8px; padding-bottom: 1.8rem; border-bottom: 2px solid #eef2eb; }
+        td { padding: 1.5rem 0; font-size: 1rem; border-bottom: 1px solid #f9fbf899; text-align: left; }
+
+        @media (max-width: 1400px) { }
+    </style>
+</head>
+<body>
+    <aside class="sidebar">
+        <div class="brand">
+            <img src="../logo.png" alt="Dra. Érica Reis">
+        </div>
+        
+        <nav class="nav-menu">
+            <div class="menu-label">Principal</div>
+            <a href="dashboard.html" class="nav-link"><i class="fa-solid fa-chart-pie"></i><span>Dashboard</span></a>
+            <a href="pacientes.html" class="nav-link"><i class="fa-solid fa-users"></i><span>Pacientes</span></a>
+            <a href="blog.html" class="nav-link"><i class="fa-solid fa-newspaper"></i><span>Conteúdo</span></a>
+            <a href="settings.html" class="nav-link"><i class="fa-solid fa-gear"></i><span>Ajustes</span></a>
+
+            <div class="menu-label">Ações</div>
+            <a href="#" class="nav-link" onclick="logout()"><i class="fa-solid fa-power-off"></i><span>Sair</span></a>
+        </nav>
+
+        <div class="sidebar-bottom">
+            <a href="#" class="user-info" style="display:flex; align-items:center; gap:0.8rem; text-decoration:none; padding-left:0.8rem;">
+                <img src="../favicon.png" style="width:36px; height:36px; border-radius:50%; border:2.4px solid var(--accent-admin);" alt="User">
+                <span style="font-size:0.9rem; font-weight:700; color:white;">Dra. Érica Reis</span>
+            </a>
+        </div>
+    </aside>
+
+    <main class="main-panel">
+        <section class="content-area">
+            <div class="section-header">
+                <h1>Painel de Atendimento</h1>
+            </div>
+
+            <div class="analytics-grid">
+                <div class="chart-main-card">
+                    <div class="chart-header">
+                        <span style="font-size:0.85rem; color:var(--text-muted); font-weight:800; text-transform:uppercase; letter-spacing:1.5px;">Aquisição Semanal Escolhida</span>
+                        <div style="display: flex; align-items: baseline; gap:15px; margin-top:8px;">
+                            <div class="value">648</div>
+                            <span style="color:#2e7d32; font-weight:700; font-size:0.95rem; background:#e7f5ed; padding:5px 15px; border-radius:12px;">+12.4%</span>
+                        </div>
+                    </div>
+                    <div class="bar-chart-mockup">
+                        <div style="flex:1; background:rgba(255,255,255,0.1); height:45%; border-radius:8px;"></div>
+                <!-- Gráfico Principal: Aquisição Semanal -->
+                <div class="chart-card">
+                    <p>Métrica de Leads Totais</p>
+                    <div class="chart-main-val">
+                        <span id="leads-count">0</span>
+                        <div class="percentage-badge"><i class="fa-solid fa-arrow-up"></i> Live Cloud</div>
+                    </div>
+                    <div class="chart-bars">
+                        <div class="bar-expert" style="height: 35%;"></div>
+                        <div class="bar-expert primary" style="height: 60%;"></div>
+                        <div class="bar-expert" style="height: 45%;"></div>
+                        <div class="bar-expert" style="height: 55%;"></div>
+                        <div class="bar-expert" style="height: 30%;"></div>
+                        <div class="bar-expert primary" style="height: 75%;"></div>
+                        <div class="bar-expert" style="height: 40%;"></div>
+                        <div class="bar-expert primary" style="height: 90%;"></div>
+                    </div>
+                </div>
+
+                <!-- Estatísticas Secundárias -->
+                <div class="stats-side-grid">
+                    <div class="mini-card">
+                        <h4>Pacientes Ativos</h4>
+                        <div class="val" id="patients-count">0</div>
+                    </div>
+                    <div class="mini-card">
+                        <h4>Fidelização</h4>
+                        <div class="val" id="fidelity-rate">--%</div>
+                    </div>
+                    <div class="mini-card">
+                        <h4>Aprovação</h4>
+                        <div class="val" id="approval-score">-.-/5</div>
+                    </div>
+                </div>
+            </div>
+
+            <section class="leads-list-compact">
+                <div class="section-header">
+                    <h2>Monitoramento de Leads</h2>
+                    <p>Relatório de Aquisição em Tempo Real</p>
+                </div>
+                <div class="table-card">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Paciente</th>
+                                <th>Meio</th>
+                                <th>Status</th>
+                            </tr>
+                        </thead>
+                        <tbody id="leads-body-mini">
+                            <!-- Inserido dinamicamente -->
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+        </section>
+    </main>
+
+    <script>
+        async function updateDashboard() {
+            try {
+                // 1. Carregar Métricas Reais
+                const mRes = await fetch('/api/admin/metrics');
+                if (mRes.status === 401 || mRes.status === 403) return window.location.href = 'login.html';
+                
+                const metrics = await mRes.json();
+                
+                document.getElementById('patients-count').innerText = metrics.patientsCount;
+                document.getElementById('leads-count').innerText = metrics.leadsCount;
+                document.getElementById('fidelity-rate').innerText = metrics.fidelityRate;
+                document.getElementById('approval-score').innerText = metrics.approvalScore;
+
+                // 2. Carregar Lista de Leads Recentes
+                const lRes = await fetch('/api/admin/leads');
+                if (lRes.status === 401 || lRes.status === 403) return window.location.href = 'login.html';
+                
+                const leads = await lRes.json();
+                const body = document.getElementById('leads-body-mini');
+                
+                body.innerHTML = leads.slice(0, 5).map(lead => `
+                    <tr>
+                        <td style="font-weight:700; color:var(--bg-admin);">${lead.nome}</td>
+                        <td style="color:var(--text-muted); text-transform:uppercase; font-size:0.75rem;">${lead.origem}</td>
+                        <td><span style="background:#eef2eb; color:var(--bg-admin); padding:6px 20px; border-radius:14px; font-size:0.8rem; font-weight:800; border:1px solid #d4dec9;">CAPTADO</span></td>
+                    </tr>
+                `).join('');
+
+            } catch (err) { 
+                console.error('Erro ao atualizar dashboard da nuvem:', err); 
+            }
+        }
+
+        function logout() { document.cookie = 'auth_token=; Max-Age=0; path=/;'; window.location.href = 'login.html'; }
+        
+        // Inicializar com Supabase Dados
+        updateDashboard();
+    </script>
+</body>
+</html>

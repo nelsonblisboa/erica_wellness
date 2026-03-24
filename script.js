@@ -117,8 +117,14 @@ if (leadForm) {
             leadForm.style.display = 'none';
             successMsg.style.display = 'block';
             
-            // In a real scenario, you would send data to your backend here
-            console.log('Lead captured:', { nome, email, whatsapp });
+            // Send data to backend
+            fetch('/api/leads', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ nome, email, whatsapp, origem: 'Ebook Magnet' })
+            }).then(response => response.json())
+              .then(data => console.log('Lead saved:', data))
+              .catch(err => console.error('Error saving lead:', err));
 
             setTimeout(() => {
                 closeModal();

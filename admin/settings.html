@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Configurações | Dra. Érica Reis</title>
+    <link rel="stylesheet" href="../style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --bg-admin: #264D36; 
+            --surface-admin: #ffffff;
+            --accent-admin: #9B8155;
+            --text-main: #141e12;
+            --text-muted: #6b7280;
+            --card-inner: #f9fbf8;
+        }
+
+        body {
+            background-color: var(--bg-admin);
+            margin: 0;
+            display: flex;
+            height: 100vh;
+            color: var(--text-main);
+            font-family: 'Manrope', sans-serif;
+            overflow: hidden;
+        }
+
+        /* Sidebar - Logo Centralizada, Comandos à Esquerda (Sincronizado) */
+        .sidebar {
+            width: 240px;
+            display: flex;
+            flex-direction: column;
+            padding: 1.5rem 0.5rem;
+            gap: 1rem;
+            flex-shrink: 0;
+            align-items: flex-start;
+        }
+
+        .sidebar .brand { width: 100%; padding: 0 0.5rem 2rem 0.5rem; text-align: center; border-bottom: 1px solid rgba(255, 255, 255, 0.05); margin-bottom: 0.5rem; }
+        .sidebar .brand img { width: 160px; height: auto; filter: brightness(0) invert(1); display: inline-block; }
+
+        .nav-menu { width: 100%; display: flex; flex-direction: column; gap: 0.2rem; flex-grow: 1; }
+        .menu-label { width: 100%; font-size: 0.65rem; text-transform: uppercase; letter-spacing: 1.5px; color: rgba(255, 255, 255, 0.25); margin: 1.5rem 0 0.5rem 0.8rem; font-weight: 800; text-align: left; }
+
+        .nav-link {
+            width: calc(100% - 1.6rem);
+            margin-left: 0.4rem;
+            display: flex;
+            align-items: center;
+            justify-content: flex-start;
+            gap: 1rem;
+            padding: 0.8rem 1rem;
+            color: rgba(255, 255, 255, 0.45);
+            text-decoration: none;
+            border-radius: 0.8rem;
+            transition: 0.2s;
+            font-weight: 600;
+            font-size: 0.88rem;
+        }
+
+        .nav-link i { font-size: 1.1rem; width: 24px; text-align: left; }
+        .nav-link:hover { color: white; background: rgba(255, 255, 255, 0.05); }
+        .nav-link.active { background: var(--accent-admin); color: white; }
+
+        /* Main Panel - Sincronizado Respirável */
+        .main-panel {
+            flex-grow: 1;
+            background: var(--surface-admin);
+            margin: 0.6rem 0.6rem 0.6rem 0;
+            border-radius: 2.8rem;
+            display: flex;
+            overflow: hidden;
+            box-shadow: 0 40px 100px rgba(0,0,0,0.3);
+        }
+
+        .content-area {
+            flex-grow: 1;
+            padding: 2.5rem 3.5rem; 
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+        }
+
+        /* Cabeçalhos de Seção Padronizados - Compactos */
+        .section-header { border-bottom: 2.2px solid #f0fde9; padding-bottom: 1.5rem; margin-bottom: 1.5rem; display: flex; flex-direction: column; gap: 0.6rem; align-items: flex-start; }
+        .section-header h1, .section-header h2 { font-family: 'Noto Serif', serif; font-size: 1.8rem; margin: 0; color: var(--bg-admin); }
+        .section-header p { color: var(--text-muted); font-size: 0.75rem; margin: 0; text-transform: uppercase; letter-spacing: 1.8px; font-weight: 800; }
+
+        /* Grade de Ajustes Otimizada */
+        .settings-grid { display: flex; flex-direction: column; gap: 3rem; max-width: 900px; width: 100%; align-items: flex-start; }
+        .settings-card { background: var(--card-inner); padding: 3rem; border-radius: 3.2rem; width: 100%; box-sizing: border-box; }
+        
+        .settings-card h3 { font-family: 'Noto Serif', serif; font-size: 1.8rem; color: var(--bg-admin); display: flex; align-items: center; gap: 1rem; margin: 0 0 2rem 0; text-align: left; }
+        .settings-card h3 i { color: var(--accent-admin); font-size: 1.4rem; }
+
+        .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; width: 100%; }
+        .field label { display: block; font-size: 0.85rem; font-weight: 800; color: var(--text-muted); text-transform: uppercase; letter-spacing: 1.5px; margin-bottom: 1rem; }
+        .field input { width: 100%; border: none; border-bottom: 2.5px solid #e2e4cf; padding: 1.2rem 0; font-size: 1.15rem; color: var(--bg-admin); outline: none; background: transparent; transition: 0.3s; }
+        .field input:focus { border-bottom-color: var(--accent-admin); }
+
+        .btn-save { background: var(--bg-admin); color: white; padding: 1.4rem 4rem; border-radius: 3rem; border: none; font-weight: 800; font-size: 1rem; cursor: pointer; transition: 0.3s; margin-top: 1rem; width: fit-content; align-self: flex-start; }
+        .btn-save:hover { background: var(--accent-admin); transform: translateY(-5px); box-shadow: 0 10px 20px rgba(0,0,0,0.1); }
+
+        .logout-section { margin-top: 2rem; border-top: 2px solid #f0fde9; padding-top: 2.5rem; width: 100%; text-align: left; }
+        .logout-txt { color: #d32f2f; font-weight: 800; text-decoration: none; font-size: 1rem; display: flex; align-items: center; gap: 1rem; }
+
+        .sidebar-bottom { width: 100%; border-top: 1px solid rgba(255, 255, 255, 0.05); padding-top: 1.5rem; margin-top: auto; }
+    </style>
+</head>
+<body>
+    <aside class="sidebar">
+        <div class="brand"><img src="../logo.png" alt="Logo"></div>
+        <nav class="nav-menu">
+            <div class="menu-label">Sistema</div>
+            <a href="dashboard.html" class="nav-link"><i class="fa-solid fa-chart-pie"></i><span>Dashboard</span></a>
+            <a href="pacientes.html" class="nav-link"><i class="fa-solid fa-users"></i><span>Pacientes</span></a>
+            <a href="blog.html" class="nav-link"><i class="fa-solid fa-newspaper"></i><span>Conteúdo</span></a>
+            <a href="settings.html" class="nav-link active"><i class="fa-solid fa-gear"></i><span>Ajustes</span></a>
+
+            <div class="menu-label">Ações</div>
+            <a href="#" class="nav-link" onclick="logout()"><i class="fa-solid fa-power-off"></i><span>Sair</span></a>
+        </nav>
+        <div class="sidebar-bottom">
+            <a href="#" style="display:flex; align-items:center; gap:0.8rem; text-decoration:none; padding-left:0.8rem;">
+                <img src="../favicon.png" style="width:36px; height:36px; border-radius:50%; border:2.4px solid var(--accent-admin);" alt="User">
+                <span style="font-size:0.9rem; font-weight:700; color:white;">Dra. Érica Reis</span>
+            </a>
+        </div>
+    </aside>
+
+    <main class="main-panel">
+        <section class="content-area">
+            <div class="section-header">
+                <h1>Ajustes do Sistema</h1>
+                <p>Configurações de Segurança e Dados</p>
+            </div>
+
+            <div class="settings-grid">
+                <section class="settings-card">
+                    <h3><i class="fa-solid fa-address-book"></i> Dados de Contato</h3>
+                    <div class="form-row">
+                        <div class="field"><label>Whats Business</label><input type="text" value="(21) 97016-7967"></div>
+                        <div class="field"><label>E-mail Suporte</label><input type="email" value="contato@ericareis.com.br"></div>
+                    </div>
+                </section>
+
+                <button class="btn-save">Salvar Configurações</button>
+
+                <div class="logout-section">
+                    <a href="#" class="logout-txt" onclick="logout()">
+                        <i class="fa-solid fa-power-off"></i>
+                        <span>Desconectar Sessão</span>
+                    </a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <script>
+        function logout() { document.cookie = 'admin_token=; Max-Age=0; path=/;'; window.location.href = 'login.html'; }
+    </script>
+</body>
+</html>

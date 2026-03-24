@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Acesso Administrativo | Dra. Érica Reis</title>
+    <link rel="stylesheet" href="../style.css">
+    <style>
+        body {
+            background-color: #f0fde9;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            margin: 0;
+            font-family: 'Manrope', sans-serif;
+        }
+        .login-card {
+            background: white;
+            padding: 4rem;
+            border-radius: 3rem;
+            box-shadow: 0 40px 80px rgba(20, 30, 18, 0.05);
+            max-width: 450px;
+            width: 90%;
+            text-align: center;
+        }
+        .login-card img {
+            height: 70px;
+            margin-bottom: 2.5rem;
+        }
+        .login-card h1 {
+            font-family: 'Noto Serif', serif;
+            font-size: 1.8rem;
+            color: #264D36;
+            margin-bottom: 0.5rem;
+        }
+        .form-group {
+            text-align: left;
+            margin-bottom: 2rem;
+        }
+        .form-group label {
+            display: block;
+            margin-bottom: 0.8rem;
+            font-weight: 700;
+            font-size: 0.85rem;
+            color: #414943;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        .form-group input {
+            width: 100%;
+            padding: 1rem 0;
+            border: none;
+            border-bottom: 1.5px solid #d4e1cd;
+            font-size: 1.1rem;
+            background: transparent;
+            box-sizing: border-box;
+            outline: none;
+            transition: 0.3s;
+        }
+        .form-group input:focus {
+            border-bottom-color: #9B8155;
+        }
+        .error-msg {
+            color: #ba1a1a;
+            font-size: 0.85rem;
+            margin-top: 1.5rem;
+            display: none;
+        }
+        .btn-full {
+            width: 100%;
+            padding: 1.2rem;
+            font-size: 1rem;
+            font-weight: 700;
+            border-radius: 3rem;
+            background: #264D36;
+            color: white;
+            border: none;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+        .btn-full:hover {
+            background: #9B8155;
+        }
+    </style>
+</head>
+<body>
+    <div class="login-card">
+        <a href="../"><img src="../logo.png" alt="Érica Reis"></a>
+        <h1>Acesso Administrativo</h1>
+        <p style="color: grey; margin-bottom: 2rem; font-size: 0.9rem;">Área exclusiva para gestão de leads e conteúdo.</p>
+        
+        <form id="login-form">
+            <div class="form-group">
+                <label>Usuário</label>
+                <input type="text" id="username" placeholder="admin" required>
+            </div>
+            <div class="form-group">
+                <label>Senha</label>
+                <input type="password" id="password" placeholder="••••••••" required>
+            </div>
+            <button type="submit" class="btn btn-primary btn-full">Entrar no Dashboard</button>
+            <div id="error-alert" class="error-msg">Usuário ou senha inválidos.</div>
+        </form>
+    </div>
+
+    <script>
+        document.getElementById('login-form').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
+            const errorAlert = document.getElementById('error-alert');
+
+            try {
+                const response = await fetch('/api/auth/login', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ username, password })
+                });
+
+                const data = await response.json();
+                
+                if (response.ok) {
+                    window.location.href = 'dashboard.html';
+                } else {
+                    errorAlert.style.display = 'block';
+                    errorAlert.innerText = data.error || 'Erro no login.';
+                }
+            } catch (err) {
+                console.error(err);
+                errorAlert.style.display = 'block';
+                errorAlert.innerText = 'Erro ao conectar ao servidor.';
+            }
+        });
+    </script>
+</body>
+</html>
