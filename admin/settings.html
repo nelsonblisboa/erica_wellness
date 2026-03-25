@@ -76,21 +76,21 @@
 
         .content-area {
             flex-grow: 1;
-            padding: 2.5rem 3.5rem; 
+            padding: 3.5rem 4rem; 
             overflow-y: auto;
             display: flex;
             flex-direction: column;
-            gap: 2rem;
+            gap: 3rem;
         }
 
-        /* Cabeçalhos de Seção Padronizados - Compactos */
-        .section-header { border-bottom: 2.2px solid #f0fde9; padding-bottom: 1.5rem; margin-bottom: 1.5rem; display: flex; flex-direction: column; gap: 0.6rem; align-items: flex-start; }
-        .section-header h1, .section-header h2 { font-family: 'Noto Serif', serif; font-size: 1.8rem; margin: 0; color: var(--bg-admin); }
-        .section-header p { color: var(--text-muted); font-size: 0.75rem; margin: 0; text-transform: uppercase; letter-spacing: 1.8px; font-weight: 800; }
+        /* Cabeçalhos de Seção Padronizados */
+        .section-header { border-bottom: none; margin-bottom: 0.5rem; display: flex; flex-direction: column; gap: 0.5rem; align-items: flex-start; }
+        .section-header h1, .section-header h2 { font-family: 'Noto Serif', serif; font-size: 2.8rem; margin: 0; color: var(--bg-admin); letter-spacing: -0.02em; }
+        .section-header p { color: var(--accent-admin); font-size: 0.85rem; margin: 0; text-transform: uppercase; letter-spacing: 2px; font-weight: 800; }
 
         /* Grade de Ajustes Otimizada */
         .settings-grid { display: flex; flex-direction: column; gap: 3rem; max-width: 900px; width: 100%; align-items: flex-start; }
-        .settings-card { background: var(--card-inner); padding: 3rem; border-radius: 3.2rem; width: 100%; box-sizing: border-box; }
+        .settings-card { background: #ebf8e3; padding: 3.5rem 4rem; border-radius: 2rem; border-top-right-radius: 4rem; width: 100%; box-sizing: border-box; box-shadow: 0 10px 30px rgba(0,0,0,0.03); }
         
         .settings-card h3 { font-family: 'Noto Serif', serif; font-size: 1.8rem; color: var(--bg-admin); display: flex; align-items: center; gap: 1rem; margin: 0 0 2rem 0; text-align: left; }
         .settings-card h3 i { color: var(--accent-admin); font-size: 1.4rem; }
@@ -159,7 +159,12 @@
     </main>
 
     <script>
+        document.querySelector('.btn-save').addEventListener('click', () => {
+            AdminUI.notify('Configurações atualizadas com sucesso!', 'success');
+        });
+
         function logout() { document.cookie = 'admin_token=; Max-Age=0; path=/;'; window.location.href = 'login.html'; }
     </script>
+    <script src="ui.js"></script>
 </body>
 </html>

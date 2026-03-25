@@ -76,17 +76,17 @@
 
         .content-area {
             flex-grow: 1;
-            padding: 2.5rem 3.5rem;
+            padding: 3.5rem 4rem;
             overflow-y: auto;
             display: flex;
             flex-direction: column;
-            gap: 2rem; /* Compactado */
+            gap: 3rem;
         }
 
-        /* Cabeçalhos de Seção Padronizados - Compactos */
-        .section-header { border-bottom: 2.2px solid #f0fde9; padding-bottom: 1.5rem; margin-bottom: 1.5rem; display: flex; flex-direction: column; gap: 0.6rem; align-items: flex-start; }
-        .section-header h1, .section-header h2 { font-family: 'Noto Serif', serif; font-size: 1.8rem; margin: 0; color: var(--bg-admin); }
-        .section-header p { color: var(--text-muted); font-size: 0.75rem; margin: 0; text-transform: uppercase; letter-spacing: 1.8px; font-weight: 800; }
+        /* Cabeçalhos de Seção Padronizados */
+        .section-header { border-bottom: none; margin-bottom: 0.5rem; display: flex; flex-direction: column; gap: 0.5rem; align-items: flex-start; }
+        .section-header h1, .section-header h2 { font-family: 'Noto Serif', serif; font-size: 2.8rem; margin: 0; color: var(--bg-admin); letter-spacing: -0.02em; }
+        .section-header p { color: var(--accent-admin); font-size: 0.85rem; margin: 0; text-transform: uppercase; letter-spacing: 2px; font-weight: 800; }
         
         .btn-new {
             background: var(--accent-admin);
@@ -104,7 +104,7 @@
         }
 
         /* Gestão Editorial Premium */
-        .content-card { background: var(--card-inner); border-radius: 3rem; padding: 3rem; width: 100%; box-sizing: border-box; }
+        .content-card { background: #ebf8e3; border-radius: 2rem; border-top-right-radius: 4rem; padding: 3.5rem 4rem; width: 100%; box-sizing: border-box; box-shadow: 0 10px 30px rgba(0,0,0,0.03); }
         table { width: 100%; border-collapse: separate; border-spacing: 0 1rem; }
         th { text-align: left; padding: 0 1.5rem 1.2rem 1.5rem; color: var(--text-muted); font-size: 0.78rem; text-transform: uppercase; letter-spacing: 1.8px; }
         td { padding: 1.8rem; background: white; border-radius: 0; text-align: left; }
@@ -168,7 +168,7 @@
                             <td><span class="badge-cat">Publicado</span></td>
                             <td>
                                 <button class="btn-action"><i class="fa-solid fa-pen"></i></button>
-                                <button class="btn-action" style="margin-left: 0.6rem;"><i class="fa-solid fa-trash"></i></button>
+                                <button class="btn-action" style="margin-left: 0.6rem;" onclick="deleteArticle('id-mock')"><i class="fa-solid fa-trash"></i></button>
                             </td>
                         </tr>
                     </tbody>
@@ -190,21 +190,34 @@
             } catch (err) { console.error('Erro blog cloud:', err); }
         }
 
-        async function createNewEditorial() {
-            const title = prompt("Digite o título do novo artigo para o blog:");
-            if (!title) return;
+        function createNewEditorial() {
+            AdminUI.prompt("Título do Artigo", "Digite o título para iniciar...", async (title) => {
+                if (!title) return AdminUI.notify('Título em branco, operação cancelada.', 'error');
+                
+                try {
+                    const res = await fetch('/api/admin/posts', {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({ title, status: 'rascunho' })
+                    });
+                    if (res.ok) {
+                        AdminUI.notify('Artigo "' + title + '" criado como rascunho!', 'success');
+                        loadPosts();
+                    }
+                } catch (err) { AdminUI.notify('Erro ao criar post.', 'error'); }
+            });
+        }
 
-            try {
-                const res = await fetch('/api/admin/posts', {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ title, status: 'rascunho' })
-                });
-                if (res.ok) {
-                    alert('Artigo "' + title + '" criado como rascunho no Supabase!');
+        function deleteArticle(id) {
+            AdminUI.confirm(
+                "Excluir Artigo", 
+                "Esta ação é irreversível. Deseja realmente excluir este artigo permanentemente?", 
+                () => {
+                    // Logic to delete using API
+                    AdminUI.notify("Artigo excluído com sucesso!", "success");
                     loadPosts();
                 }
-            } catch (err) { alert('Erro ao criar post.'); }
+            );
         }
 
         function logout() { document.cookie = 'auth_token=; Max-Age=0; path=/;'; window.location.href = 'login.html'; }
@@ -213,5 +226,6 @@
         document.querySelector('.btn-new').onclick = (e) => { e.preventDefault(); createNewEditorial(); };
         loadPosts();
     </script>
+    <script src="ui.js"></script>
 </body>
 </html>

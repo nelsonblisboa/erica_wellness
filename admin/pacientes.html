@@ -53,17 +53,17 @@
 
         .content-area {
             flex-grow: 1;
-            padding: 2.5rem 3.5rem;
+            padding: 3.5rem 4rem;
             overflow-y: auto;
             display: flex;
             flex-direction: column;
-            gap: 2rem;
+            gap: 3rem;
         }
 
-        /* Cabeçalhos de Seção Padronizados - Compactos */
-        .section-header { border-bottom: 2.2px solid var(--border-soft); padding-bottom: 1.5rem; margin-bottom: 1.5rem; display: flex; flex-direction: column; gap: 0.6rem; align-items: flex-start; }
-        .section-header h1, .section-header h2 { font-family: 'Noto Serif', serif; font-size: 1.8rem; margin: 0; color: var(--bg-admin); }
-        .section-header p { color: var(--text-muted); font-size: 0.75rem; margin: 0; text-transform: uppercase; letter-spacing: 1.8px; font-weight: 800; }
+        /* Cabeçalhos de Seção Padronizados */
+        .section-header { border-bottom: none; margin-bottom: 0.5rem; display: flex; flex-direction: column; gap: 0.5rem; align-items: flex-start; }
+        .section-header h1, .section-header h2 { font-family: 'Noto Serif', serif; font-size: 2.8rem; margin: 0; color: var(--bg-admin); letter-spacing: -0.02em; }
+        .section-header p { color: var(--accent-admin); font-size: 0.85rem; margin: 0; text-transform: uppercase; letter-spacing: 2px; font-weight: 800; }
 
         /* Estilo das Abas (Tabs) */
         .tab-nav { display: flex; gap: 2rem; border-bottom: 1px solid var(--border-soft); padding-bottom: 0.5rem; overflow-x: auto; scrollbar-width: none; margin-top: -1rem; }
@@ -79,10 +79,10 @@
         @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
 
         /* Seções e Cards de Dados */
-        .grid-data { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1.5rem; }
-        .data-card { background: var(--card-inner); padding: 2.2rem; border-radius: 2.5rem; border: 1px solid rgba(0,0,0,0.02); }
-        .data-card h3 { font-family: 'Noto Serif'; font-size: 1.4rem; color: var(--bg-admin); margin: 0 0 1.5rem 0; display: flex; align-items: center; gap: 0.8rem; }
-        .data-card h3 i { color: var(--accent-admin); font-size: 1.1rem; }
+        .grid-data { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; }
+        .data-card { background: #ebf8e3; padding: 2.5rem 3rem; border-radius: 2rem; border-top-right-radius: 4rem; border: none; box-shadow: 0 10px 30px rgba(0,0,0,0.03); }
+        .data-card h3 { font-family: 'Noto Serif'; font-size: 1.5rem; color: var(--bg-admin); margin: 0 0 1.5rem 0; display: flex; align-items: center; gap: 0.8rem; letter-spacing: -0.01em; }
+        .data-card h3 i { color: var(--accent-admin); font-size: 1.2rem; }
 
         .form-group { margin-bottom: 1.5rem; }
         .form-label { display: block; font-size: 0.72rem; font-weight: 800; color: var(--text-muted); text-transform: uppercase; letter-spacing: 1.2px; margin-bottom: 0.6rem; }
@@ -105,6 +105,21 @@
         .btn-action-main { background: var(--bg-admin); color: white; padding: 1.2rem 3rem; border-radius: 2.5rem; font-weight: 800; border: none; cursor: pointer; transition: 0.3s; margin-top: 1rem; }
         .btn-action-main:hover { background: var(--accent-admin); transform: translateY(-3px); }
 
+        /* Modal & List Styles */
+        .modal { display: none; position: fixed; z-index: 1000; left: 0; top: 0; width: 100%; height: 100%; background-color: rgba(38, 77, 54, 0.4); backdrop-filter: blur(4px); align-items: center; justify-content: center; }
+        .modal.active { display: flex; }
+        .modal-content { background: var(--surface-admin); padding: 3rem 4rem; border-radius: 2rem; width: 500px; max-width: 90%; position: relative; }
+        .close-modal { position: absolute; top: 1.5rem; right: 2rem; font-size: 1.8rem; cursor: pointer; color: var(--text-muted); }
+        .close-modal:hover { color: var(--bg-admin); }
+        .patients-table { width: 100%; border-collapse: collapse; margin-top: 2rem; background: white; border-radius: 1.5rem; overflow: hidden; box-shadow: 0 4px 15px rgba(0,0,0,0.02); }
+        .patients-table th { background: #ebf8e3; padding: 1.5rem; text-align: left; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 1.5px; color: var(--accent-admin); }
+        .patients-table td { padding: 1.5rem; border-bottom: 1px solid #f0fde9; font-size: 1rem; color: var(--text-main); font-weight: 600; }
+        .patient-row { cursor: pointer; transition: 0.2s; }
+        .patient-row:hover { background: #f9fbf8; }
+        .btn-back { display: inline-flex; align-items: center; gap: 0.5rem; background: none; border: none; color: var(--text-muted); font-weight: 800; cursor: pointer; margin-bottom: 1rem; font-size: 0.85rem; text-transform: uppercase; letter-spacing: 1px; }
+        .btn-back:hover { color: var(--bg-admin); }
+        .file-upload-wrapper { position: relative; overflow: hidden; display: inline-block; }
+        .file-upload-input { position: absolute; font-size: 100px; opacity: 0; right: 0; top: 0; cursor: pointer; height: 100%; }
     </style>
 </head>
 <body>
@@ -129,21 +144,46 @@
 
     <main class="main-panel">
         <section class="content-area">
-            <div class="section-header" style="display:flex; flex-direction:row; justify-content:space-between; align-items:center; gap:2rem; margin-bottom: 2rem;">
-                <div id="patient-header-title" style="flex: 0 0 auto; text-align: left;">
-                    <h1 style="color:var(--bg-admin); font-family:'Noto Serif'; font-size:1.8rem; margin:0;">Espaço do Paciente</h1>
-                    <p style="color:var(--text-muted); font-size:0.75rem; margin:0; text-transform:uppercase; letter-spacing:1.8px; font-weight:800;">Gestão Clínica Longitudinal</p>
-                </div>
-                
-                <div class="search-wrap-expert" style="flex:1; max-width:450px; background:rgba(42, 85, 60, 0.05); border-radius:1rem; display:flex; align-items:center; padding:0 1.2rem; border:1px solid #eef2eb;">
-                    <i class="fa-solid fa-magnifying-glass" style="color:var(--bg-admin); opacity:0.5;"></i>
-                    <input type="text" placeholder="Nome, CPF, E-mail ou Telefone..." style="background:none; border:none; padding:0.8rem 1rem; width:100%; outline:none; font-size:0.85rem; font-family:'Manrope'; color:var(--bg-admin); font-weight:600;">
+            <!-- VIEW: LISTA DE PACIENTES -->
+            <div id="patients-list-view">
+                <div class="section-header" style="display:flex; flex-direction:row; justify-content:space-between; align-items:center; gap:2rem; margin-bottom: 2rem; border:none;">
+                    <div style="flex: 0 0 auto; text-align: left;">
+                        <h1>Pacientes</h1>
+                        <p style="color:var(--accent-admin); font-size:0.85rem; text-transform:uppercase; letter-spacing:2px; font-weight:800; margin:0;">Diretório Clínico</p>
+                    </div>
+                    
+                    <div class="search-wrap-expert" style="flex:1; max-width:450px; background:#ebf8e3; border-radius:1rem; display:flex; align-items:center; padding:0 1.2rem;">
+                        <i class="fa-solid fa-magnifying-glass" style="color:var(--bg-admin); opacity:0.5;"></i>
+                        <input type="text" placeholder="Buscar paciente..." style="background:none; border:none; padding:1rem; width:100%; outline:none; font-size:0.9rem; font-weight:600; color:var(--bg-admin);">
+                    </div>
+
+                    <div style="flex: 0 0 auto;">
+                        <button class="btn-action-main" onclick="openNewPatientModal()" style="padding: 1rem 2rem; font-size: 0.9rem; margin:0;"><i class="fa-solid fa-plus" style="margin-right:8px;"></i> Novo Paciente</button>
+                    </div>
                 </div>
 
-                <div id="patient-header-actions" style="flex: 0 0 auto;">
-                    <button class="btn-action-main" onclick="createNewPatient()" style="padding: 0.8rem 1.8rem; font-size: 0.8rem; margin:0;">Novo Paciente</button>
-                </div>
+                <table class="patients-table">
+                    <thead>
+                        <tr>
+                            <th>Nome Completo</th>
+                            <th>Status</th>
+                            <th>Data Cadastro</th>
+                            <th>Ação</th>
+                        </tr>
+                    </thead>
+                    <tbody id="patients-list-body">
+                        <!-- Carregado via JS -->
+                    </tbody>
+                </table>
             </div>
+
+            <!-- VIEW: DETALHE DO PACIENTE -->
+            <div id="patient-detail-view" style="display: none;">
+                <button class="btn-back" onclick="showListView()"><i class="fa-solid fa-arrow-left"></i> Voltar para Lista</button>
+                <div class="section-header" style="margin-bottom: 1rem;">
+                    <h1 id="detail-patient-name">Nome do Paciente</h1>
+                    <p>Gestão Clínica Longitudinal</p>
+                </div>
 
             <div class="tab-nav">
                 <button class="tab-btn active" onclick="switchTab(event, 'visao-geral')">Visão Geral</button>
@@ -159,37 +199,33 @@
             <div id="visao-geral" class="tab-content active">
                 <div class="patient-quick-metrics">
                     <div class="metric-pill">
-                        <span class="lab">Peso Atual</span>
-                        <div class="val">72.4 <small style="font-size:0.8rem; color:#d32f2f;">-1.2kg</small></div>
+                        <span class="lab">Peso Atual (Último)</span>
+                        <div class="val" id="vg-peso">-- <small id="vg-peso-diff" style="font-size:0.8rem;"></small></div>
                     </div>
                     <div class="metric-pill">
-                        <span class="lab">Aderência Méd.</span>
-                        <div class="val">88%</div>
+                        <span class="lab">Aderência Méd. (Metas)</span>
+                        <div class="val" id="vg-aderencia">--%</div>
                     </div>
                     <div class="metric-pill">
-                        <span class="lab">Status</span>
-                        <div style="font-size:1.4rem; font-weight:800; color:#2e7d32; text-transform:uppercase; margin-top:5px;">Ativo</div>
+                        <span class="lab">Status de Cadastro</span>
+                        <div id="vg-status" style="font-size:1.4rem; font-weight:800; color:#2e7d32; text-transform:uppercase; margin-top:5px;">--</div>
                     </div>
                     <div class="metric-pill">
-                        <span class="lab">Próx. Retorno</span>
-                        <div class="val" style="font-size:1.4rem;">12/Abr</div>
+                        <span class="lab">Próx. Retorno (Data)</span>
+                        <input type="date" id="rec-retorno" class="form-input" style="font-size:1rem; border:none; border-bottom:1px solid #eef2eb; padding:5px 0; background:transparent; font-family:'Outfit'; outline:none; color:var(--bg-admin); font-weight:700;">
                     </div>
                 </div>
 
                 <div class="grid-data">
                     <div class="data-card">
                         <h3><i class="fa-solid fa-bullseye"></i> Objetivo Principal</h3>
-                        <p style="font-size:1.1rem; font-weight:700; color:var(--bg-admin); margin:0;">Reeducação alimentar e ganho de massa magra estético.</p>
-                        <div style="margin-top:1.5rem; display:flex; gap:0.5rem; flex-wrap:wrap;">
-                            <span class="badge-cat" style="background:#eef2eb; color:var(--bg-admin); padding:5px 12px; border-radius:10px; font-size:0.7rem; font-weight:800;">HIPERTROFIA</span>
-                            <span class="badge-cat" style="background:#eef2eb; color:var(--bg-admin); padding:5px 12px; border-radius:10px; font-size:0.7rem; font-weight:800;">SAÚDE INTESTINAL</span>
-                        </div>
+                        <textarea id="rec-objetivo" class="form-input" placeholder="Digite o objetivo central ou dieta do paciente..." style="width:100%; border:1px dashed #eef2eb; padding:1rem; border-radius:1rem; background:transparent; font-size:1.1rem; font-weight:700; color:var(--bg-admin); resize:none;"></textarea>
                     </div>
                     <div class="data-card">
                         <h3><i class="fa-solid fa-triangle-exclamation"></i> Alertas Críticos</h3>
                         <div style="background:#fffcf0; border:1px solid #ffe58f; padding:1rem; border-radius:1rem; display:flex; gap:0.8rem; align-items:center;">
                             <i class="fa-solid fa-circle-exclamation" style="color:#d4a017;"></i>
-                            <span style="font-size:0.85rem; font-weight:700;">Ferritina baixa identificada no último exame.</span>
+                            <input type="text" id="rec-alertas" class="form-input" placeholder="Insira alertas médicos como alergias ou exame crítico..." style="width:100%; border:none; background:transparent; font-size:0.85rem; font-weight:700; color:#856404; outline:none;">
                         </div>
                     </div>
                 </div>
@@ -227,15 +263,15 @@
                         </div>
                         <div class="form-group">
                             <label class="form-label">Status do Paciente</label>
-                            <select class="form-input">
-                                <option selected>Ativo</option>
-                                <option>Em Pausa</option>
-                                <option>Alta</option>
+                            <select id="reg-status" class="form-input">
+                                <option value="ativo">Ativo</option>
+                                <option value="em_pausa">Em Pausa</option>
+                                <option value="alta">Alta</option>
                             </select>
                         </div>
                     </div>
                 </div>
-                <button class="btn-action-main" onclick="savePatientData()">Salvar Alterações no Supabase</button>
+                <button class="btn-action-main" onclick="switchTab({currentTarget: document.querySelector('.tab-nav .tab-btn:nth-child(3)')}, 'saude')">Avançar Saúde <i class="fa-solid fa-arrow-right"></i></button>
             </div>
 
             <!-- TAB: SAÚDE & ANAMNESE -->
@@ -243,42 +279,37 @@
                 <div class="grid-data">
                     <div class="data-card" style="grid-column: span 2;">
                         <h3><i class="fa-solid fa-notes-medical"></i> Queixas e Objetivos</h3>
-                        <textarea class="form-input" style="height:100px; border:1px solid #eef2eb; border-radius:1rem; padding:1rem;" placeholder="Descreva a queixa principal do paciente..."></textarea>
+                        <textarea id="rec-queixas" class="form-input" style="height:100px; border:1px solid #eef2eb; border-radius:1rem; padding:1rem;" placeholder="Descreva a queixa principal do paciente..."></textarea>
                     </div>
-                    <div class="data-card">
+                    <div class="data-card" style="grid-column: span 2;">
                         <h3><i class="fa-solid fa-pills"></i> Medicamentos & Suplementos</h3>
-                        <div class="form-group">
-                            <label class="form-label">Sertralina 50mg</label>
-                            <span class="form-val">Uso contínuo (Manhã)</span>
-                        </div>
-                        <div class="form-group">
-                            <label class="form-label">Creatina</label>
-                            <span class="form-val">5g diárias</span>
-                        </div>
+                        <textarea id="rec-meds" class="form-input" style="height:100px; border:1px solid #eef2eb; border-radius:1rem; padding:1rem;" placeholder="Ex: Sertralina 50mg (Manhã)"></textarea>
                     </div>
                 </div>
             </div>
 
-            <!-- TAB: EVOLUÇÃO (ANTROPOMETRIA) -->
+            <!-- TAB: EVOLUÇÃO (HISTÓRICO DE CONSULTAS) -->
             <div id="evolucao" class="tab-content">
-                <div class="grid-data">
-                    <div class="data-card">
-                        <h3><i class="fa-solid fa-ruler-vertical"></i> Medidas Atuais</h3>
-                        <div style="display:grid; grid-template-columns:1fr 1fr; gap:1.2rem;">
-                            <div class="form-group"><label class="form-label">Altura (cm)</label><input type="number" class="form-input" value="168"></div>
-                            <div class="form-group"><label class="form-label">Cintura (cm)</label><input type="number" class="form-input" value="72"></div>
-                            <div class="form-group"><label class="form-label">Abdômen (cm)</label><input type="number" class="form-input" value="84"></div>
-                            <div class="form-group"><label class="form-label">Braço (cm)</label><input type="number" class="form-input" value="30"></div>
-                        </div>
+                <div class="data-card" style="margin-bottom:2rem; background:#ebf8e3; border:1px solid var(--accent-admin);">
+                    <h3 style="color:var(--bg-admin);"><i class="fa-solid fa-calendar-plus"></i> Registrar Nova Consulta (Hoje)</h3>
+                    <div style="display:grid; grid-template-columns:1fr 1fr; gap:1.2rem; margin-bottom:1rem;">
+                        <div class="form-group"><label class="form-label">Data da Consulta</label><input type="date" id="cons-data" class="form-input"></div>
+                        <div class="form-group"><label class="form-label">Peso Atual (kg)</label><input type="number" id="cons-peso" class="form-input"></div>
+                        <div class="form-group"><label class="form-label">Cintura (cm)</label><input type="number" id="cons-cintura" class="form-input"></div>
+                        <div class="form-group"><label class="form-label">Gordura Corporal (%)</label><input type="number" id="cons-gordura" class="form-input"></div>
                     </div>
-                    <div class="data-card">
-                        <h3><i class="fa-solid fa-percentage"></i> Bioimpedância</h3>
-                        <div style="display:grid; grid-template-columns:1fr 1fr; gap:1.2rem;">
-                            <div class="form-group"><label class="form-label">Massa Magra (kg)</label><input type="number" class="form-input" value="54.2"></div>
-                            <div class="form-group"><label class="form-label">Gordura (%)</label><input type="number" class="form-input" value="22.5"></div>
-                            <div class="form-group"><label class="form-label">Gord. Visceral</label><input type="number" class="form-input" value="4"></div>
-                            <div class="form-group"><label class="form-label">TMB (kcal)</label><input type="number" class="form-input" value="1540"></div>
-                        </div>
+                    <div class="form-group">
+                        <label class="form-label">Evolução e Conduta Clínica (Anotações)</label>
+                        <textarea id="cons-notas" class="form-input" style="height:80px; padding:1rem;" placeholder="Como o paciente evoluiu desde a última consulta? Quais as novas orientações?"></textarea>
+                    </div>
+                    <button class="btn-action-main" onclick="addConsultation()" style="padding: 0.8rem 1.5rem; font-size:0.8rem; margin:0;"><i class="fa-solid fa-plus"></i> Adicionar ao Histórico</button>
+                </div>
+
+                <div class="data-card">
+                    <h3><i class="fa-solid fa-timeline"></i> Linha do Tempo Clínico</h3>
+                    <div id="consultations-timeline" style="display:flex; flex-direction:column; gap:1.5rem; margin-top:2rem;">
+                        <!-- Renderizado via JS -->
+                        <p style="color:var(--text-muted); font-size:0.9rem;">Nenhum histórico registrado para este paciente.</p>
                     </div>
                 </div>
             </div>
@@ -288,57 +319,79 @@
                 <div class="data-card">
                     <h3><i class="fa-solid fa-utensils"></i> Hábitos e Dietética</h3>
                     <div class="form-row" style="display:grid; grid-template-columns: repeat(3, 1fr); gap:2rem;">
-                        <div class="form-group"><label class="form-label">Consumo de Água</label><span class="form-val">2.5L / dia</span></div>
-                        <div class="form-group"><label class="form-label">Fome Emocional</label><span class="form-val">Moderada (Noite)</span></div>
-                        <div class="form-group"><label class="form-label">Hábito de Beliscar</label><span class="form-val">Raro</span></div>
+                        <div class="form-group"><label class="form-label">Consumo de Água</label><input type="text" id="ali-agua" class="form-input" placeholder="Ex: 2.5L / dia"></div>
+                        <div class="form-group"><label class="form-label">Fome Emocional</label><input type="text" id="ali-fome" class="form-input" placeholder="Ex: Moderada (Noite)"></div>
+                        <div class="form-group"><label class="form-label">Hábito de Beliscar</label><input type="text" id="ali-beliscar" class="form-input" placeholder="Ex: Raro"></div>
                     </div>
                     <hr style="border:0; border-top:1.5px solid var(--border-soft); margin: 2rem 0;">
                     <h4 style="font-size:0.8rem; text-transform:uppercase; letter-spacing:1px; color:var(--text-muted); margin-bottom:1rem;">Preferências & Aversões</h4>
-                    <p style="font-size:0.95rem; line-height:1.6;"><strong>Gosta:</strong> Frutas cítricas, ovos, abacate, frango.<br><strong>Não tolera:</strong> Coentro, carne vermelha gordurosa.</p>
+                    <textarea id="ali-notas" class="form-input" style="height:100px; padding:1rem;" placeholder="Gosta de... Não tolera..."></textarea>
                 </div>
             </div>
 
             <!-- TAB: METAS -->
             <div id="metas" class="tab-content">
+                <div class="data-card" style="margin-bottom:2rem; background:#ebf8e3; border:1px solid var(--accent-admin);">
+                    <h3 style="color:var(--bg-admin);"><i class="fa-solid fa-bullseye"></i> Adicionar Nova Meta</h3>
+                    <div style="display:grid; grid-template-columns:1fr 1fr; gap:1.2rem; margin-bottom:1rem;">
+                        <div class="form-group"><label class="form-label">Descrição da Meta</label><input type="text" id="meta-titulo" class="form-input" placeholder="Ex: Bater 2.5L de água por 15 dias"></div>
+                        <div class="form-group"><label class="form-label">Prazo ou Observações</label><input type="text" id="meta-prazo" class="form-input" placeholder="Ex: Início 01/03 - Revisão 20/03"></div>
+                    </div>
+                    <button class="btn-action-main" onclick="addGoal()" style="padding: 0.8rem 1.5rem; font-size:0.8rem; margin:0;"><i class="fa-solid fa-plus"></i> Inserir Meta</button>
+                </div>
+
                 <div class="data-card">
                     <h3><i class="fa-solid fa-check-double"></i> Metas Vigentes</h3>
-                    <div class="goals-list">
-                        <div class="goal-item">
-                            <div class="goal-check done"><i class="fa-solid fa-check"></i></div>
-                            <div>
-                                <div style="font-weight:800; color:var(--bg-admin);">Bater 2.5L de água por 15 dias</div>
-                                <div style="font-size:0.75rem; color:var(--text-muted);">Início: 01/03 — Revisão: 20/03</div>
-                            </div>
-                        </div>
-                        <div class="goal-item">
-                            <div class="goal-check"></div>
-                            <div>
-                                <div style="font-weight:800; color:var(--bg-admin);">Zero ultraprocessados no final de semana</div>
-                                <div style="font-size:0.75rem; color:var(--text-muted);">Foco: Saúde Intestinal</div>
-                            </div>
-                        </div>
+                    <div class="goals-list" id="goals-list-container">
+                        <!-- Renderizado via JS -->
+                        <p style="color:var(--text-muted); font-size:0.9rem;">Nenhuma meta ativa.</p>
                     </div>
-                    <button class="btn-action-main" style="background:var(--accent-admin);">Adicionar Meta</button>
                 </div>
             </div>
 
             <!-- TAB: EXAMES -->
             <div id="exames" class="tab-content">
                 <div class="data-card">
-                    <h3><i class="fa-solid fa-file-medical"></i> Resultados e Solicitações</h3>
-                    <div style="background:#fffcf0; border:1px solid #ffe58f; padding:2rem; border-radius:1.5rem; display:flex; gap:1.5rem; align-items:center;">
-                        <i class="fa-solid fa-file-pdf" style="font-size:2.5rem; color:#d4a017;"></i>
-                        <div style="flex:1;">
-                            <div style="font-weight:800; color:var(--bg-admin); font-size:1.1rem;">Análise de Sangue - Março 2024</div>
-                            <div style="font-size:0.8rem; color:var(--text-muted);">PDF enviado via integração WhatsApp</div>
-                        </div>
-                        <button class="btn-action-main" style="padding:0.75rem 1.5rem; font-size:0.75rem; background:var(--bg-admin);">Visualizar PDF</button>
+                    <h3><i class="fa-solid fa-file-medical"></i> Arquivos e Exames</h3>
+                    
+                    <div class="file-upload-wrapper btn-action-main" style="margin-bottom: 2rem; background: var(--accent-admin);">
+                        <i class="fa-solid fa-upload"></i> Anexar PDF/JPG
+                        <input type="file" id="exam-upload-input" class="file-upload-input" accept=".pdf,.jpg,.jpeg,.png" onchange="uploadExam()">
+                    </div>
+
+                    <div id="exams-list" style="display:flex; flex-direction:column; gap:1rem;">
+                        <!-- Arquivos carregados via JS -->
                     </div>
                 </div>
             </div>
 
+            <!-- Global Actions at bottom -->
+            <div style="display:flex; justify-content:space-between; margin-top:3rem; padding-top:2rem; border-top:1px solid #eef2eb;">
+                <button class="btn-action-main" onclick="deletePatientData()" style="background:transparent; border:2px solid #d32f2f; color:#d32f2f;">Excluir Prontuário</button>
+                <button class="btn-action-main" onclick="savePatientData()"><i class="fa-solid fa-save"></i> Salvar Alterações</button>
+            </div>
+            
+            </div> <!-- Fechamento da DIV patient-detail-view -->
+
         </section>
     </main>
+
+    <!-- Modal Novo Paciente -->
+    <div id="new-patient-modal" class="modal">
+        <div class="modal-content">
+            <span class="close-modal" onclick="closeNewPatientModal()">&times;</span>
+            <h2 style="font-family:'Noto Serif'; font-size:2rem; color:var(--bg-admin); margin-top:0;">Novo Cadastro</h2>
+            <div class="form-group" style="margin-top:2rem;">
+                <label class="form-label">Nome Completo</label>
+                <input type="text" id="new-pat-name" class="form-input" placeholder="Ex: Maria Antonieta">
+            </div>
+            <div class="form-group">
+                <label class="form-label">CPF</label>
+                <input type="text" id="new-pat-cpf" class="form-input" placeholder="000.000.000-00">
+            </div>
+            <button class="btn-action-main" style="width:100%;" onclick="submitNewPatient()">Cadastrar Paciente</button>
+        </div>
+    </div>
 
     <script>
         function switchTab(evt, tabId) {
@@ -354,41 +407,438 @@
             targetContent.classList.add('active');
         }
 
-        async function createNewPatient() {
-            const name = prompt("Digite o nome completo do novo paciente:");
-            if (!name) return;
+        let currentPatientId = null;
+        let patientConsultations = [];
+        let patientGoals = [];
+
+        function showListView() {
+            document.getElementById('patient-detail-view').style.display = 'none';
+            document.getElementById('patients-list-view').style.display = 'block';
+            loadPatientsList();
+        }
+
+        async function showDetailView(patientId) {
+            currentPatientId = patientId;
+            document.getElementById('patients-list-view').style.display = 'none';
+            document.getElementById('patient-detail-view').style.display = 'block';
+            switchTab({currentTarget: document.querySelector('.tab-nav .tab-btn')}, 'visao-geral'); // Reset to first tab
+            
+            try {
+                const res = await fetch('/api/admin/patients/' + patientId);
+                const data = await res.json();
+                
+                document.getElementById('detail-patient-name').innerText = data.full_name || 'Paciente Sem Nome';
+                
+                // Preencher Aba Cadastro
+                document.getElementById('reg-name').value = data.full_name || '';
+                document.getElementById('reg-cpf').value = data.cpf || '';
+                if(data.birth_date) document.getElementById('reg-birth').value = data.birth_date;
+                if(data.status) document.getElementById('reg-status').value = data.status;
+                
+                // Fetch Extended Record
+                patientConsultations = [];
+                try {
+                    const recRes = await fetch('/api/admin/patients/' + patientId + '/record');
+                    if (recRes.ok) {
+                        const rec = await recRes.json();
+                        document.getElementById('rec-queixas').value = rec.queixas || '';
+                        document.getElementById('rec-meds').value = rec.meds || '';
+                        document.getElementById('ali-agua').value = rec.ali_agua || '';
+                        document.getElementById('ali-fome').value = rec.ali_fome || '';
+                        document.getElementById('ali-beliscar').value = rec.ali_beliscar || '';
+                        document.getElementById('ali-notas').value = rec.ali_notas || '';
+                        document.getElementById('rec-retorno').value = rec.vg_retorno || '';
+                        document.getElementById('rec-objetivo').value = rec.vg_objetivo || '';
+                        document.getElementById('rec-alertas').value = rec.vg_alertas || '';
+                        
+                        // Parse consultas & metas
+                        if(rec.consultas && Array.isArray(rec.consultas)) {
+                            patientConsultations = rec.consultas;
+                        }
+                        if(rec.metas && Array.isArray(rec.metas)) {
+                            patientGoals = rec.metas;
+                        }
+                    }
+                } catch(e) {}
+
+                // Default today on dates
+                document.getElementById('cons-data').value = new Date().toISOString().split('T')[0];
+                renderConsultations();
+                renderGoals();
+                renderOverview(); // Renderiza os dados dinâmicos da Visão Geral
+
+                // Simulando limpeza do campo de exames
+                document.getElementById('exams-list').innerHTML = `<p style="color:var(--text-muted); font-size:0.85rem;">Nenhum exame anexado recentemente (Simulação visual).</p>`;
+            } catch(e) { console.error('Error loading patient detail', e); }
+        }
+
+        async function loadPatientsList() {
+            try {
+                const res = await fetch('/api/admin/patients');
+                if(!res.ok) throw new Error('Falha ao carregar');
+                const patients = await res.json();
+                const body = document.getElementById('patients-list-body');
+                body.innerHTML = patients.map(p => `
+                    <tr class="patient-row" onclick="showDetailView('${p.id}')">
+                        <td><div style="font-weight:700; color:var(--bg-admin);">${p.full_name || 'Indefinido'}</div></td>
+                        <td><span style="background:#eef2eb; color:#2a553c; padding:4px 12px; border-radius:12px; font-size:0.75rem; font-weight:800; text-transform:uppercase;">${p.status || 'Ativo'}</span></td>
+                        <td style="color:var(--text-muted);">${new Date(p.created_at).toLocaleDateString()}</td>
+                        <td style="display:flex; justify-content:space-between; align-items:center;">
+                            <button onclick="event.stopPropagation(); deletePatientFromList('${p.id}')" style="background:none; border:none; color:#d32f2f; cursor:pointer; font-size:1.1rem; padding: 0.5rem;" title="Excluir Paciente Totalmente"><i class="fa-solid fa-trash-can"></i></button>
+                            <i class="fa-solid fa-chevron-right" style="color:var(--accent-admin);"></i>
+                        </td>
+                    </tr>
+                `).join('');
+            } catch(e) { console.error(e); }
+        }
+
+        <!-- Modals and Creation -->
+        function openNewPatientModal() { document.getElementById('new-patient-modal').classList.add('active'); }
+        function closeNewPatientModal() { document.getElementById('new-patient-modal').classList.remove('active'); }
+
+        async function submitNewPatient() {
+            const name = document.getElementById('new-pat-name').value;
+            const cpf = document.getElementById('new-pat-cpf').value;
+            if (!name) return AdminUI.notify('O nome é obrigatório!', 'error');
             
             try {
                 const res = await fetch('/api/admin/patients', {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ full_name: name, status: 'ativo' })
+                    body: JSON.stringify({ full_name: name, cpf: cpf, status: 'ativo' })
                 });
                 if (res.ok) {
-                    alert('Paciente "' + name + '" criado com sucesso na nuvem!');
-                    window.location.reload();
+                    AdminUI.notify('Paciente criado com sucesso!', 'success');
+                    closeNewPatientModal();
+                    loadPatientsList();
                 }
-            } catch (err) { alert('Erro ao criar paciente.'); }
+            } catch (err) { AdminUI.notify('Erro ao criar paciente.', 'error'); }
+        }
+
+        function deletePatientFromList(id) {
+            AdminUI.confirm("Excluir Paciente", "Esta ação apagará O PRONTUÁRIO INTEIRO deste paciente e é irreversível. Prosseguir?", async () => {
+                try {
+                    const res = await fetch('/api/admin/patients/' + id, { method: 'DELETE' });
+                    if (res.ok) {
+                        AdminUI.notify('Paciente removido integralmente!', 'success');
+                        loadPatientsList();
+                    } else { AdminUI.notify('Erro ao excluir paciente.', 'error'); }
+                } catch (err) { AdminUI.notify('Erro grave de servidor.', 'error'); }
+            });
+        }
+
+        async function deletePatientData() {
+            if(!currentPatientId) return;
+            AdminUI.confirm("Excluir Paciente", "Esta ação apagará fisicamente os dados deste paciente e é irreversível. Prosseguir?", async () => {
+                try {
+                    const res = await fetch('/api/admin/patients/' + currentPatientId, { method: 'DELETE' });
+                    if (res.ok) {
+                        AdminUI.notify('Paciente excluído com sucesso!', 'success');
+                        showListView();
+                    } else { AdminUI.notify('Erro ao excluir paciente.', 'error'); }
+                } catch (err) { AdminUI.notify('Erro grave de servidor.', 'error'); }
+            });
         }
 
         async function savePatientData() {
-            const data = {
+            if(!currentPatientId) return;
+            // Native Supabase fields
+            const dataCore = {
                 full_name: document.getElementById('reg-name').value,
                 birth_date: document.getElementById('reg-birth').value,
-                cpf: document.getElementById('reg-cpf').value
+                cpf: document.getElementById('reg-cpf').value,
+                status: document.getElementById('reg-status').value
+            };
+
+            // Extended Custom fields
+            const dataRecord = {
+                queixas: document.getElementById('rec-queixas').value,
+                meds: document.getElementById('rec-meds').value,
+                ali_agua: document.getElementById('ali-agua').value,
+                ali_fome: document.getElementById('ali-fome').value,
+                ali_beliscar: document.getElementById('ali-beliscar').value,
+                ali_notas: document.getElementById('ali-notas').value,
+                vg_retorno: document.getElementById('rec-retorno').value,
+                vg_objetivo: document.getElementById('rec-objetivo').value,
+                vg_alertas: document.getElementById('rec-alertas').value,
+                consultas: patientConsultations,
+                metas: patientGoals
             };
             
             try {
-                const res = await fetch('/api/admin/patients', {
-                    method: 'POST',
+                // Save DB
+                const resDB = await fetch('/api/admin/patients/' + currentPatientId, {
+                    method: 'PUT',
                     headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify(data)
+                    body: JSON.stringify(dataCore)
                 });
-                if (res.ok) alert('Prontuário atualizado no Supabase!');
-            } catch (err) { alert('Erro ao salvar dados.'); }
+                // Save Record Local
+                const resRec = await fetch('/api/admin/patients/' + currentPatientId + '/record', {
+                    method: 'PUT',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(dataRecord)
+                });
+                
+                if (resDB.ok && resRec.ok) { 
+                    AdminUI.notify('Prontuário completamente atualizado!', 'success');
+                    // update Title in view
+                    document.getElementById('detail-patient-name').innerText = dataCore.full_name;
+                } else {
+                    AdminUI.notify('Ocorreu um erro ao salvar (Dados inválidos)', 'error');
+                }
+            } catch (err) { AdminUI.notify('Erro de conexão ao salvar.', 'error'); }
+        }
+
+        // --- Upload ---
+        async function uploadExam() {
+            const fileInput = document.getElementById('exam-upload-input');
+            const file = fileInput.files[0];
+            if(!file || !currentPatientId) return;
+
+            const formData = new FormData();
+            formData.append('documento', file);
+
+            try {
+                const res = await fetch('/api/admin/patients/' + currentPatientId + '/upload', {
+                    method: 'POST',
+                    body: formData
+                });
+                if (res.ok) {
+                    const data = await res.json();
+                    AdminUI.notify('Arquivo enviado com sucesso!', 'success');
+                    // Simular adição visual
+                    const examsList = document.getElementById('exams-list');
+                    examsList.innerHTML += `
+                    <div style="background:#f9fbf8; border:1px solid #f0fde9; padding:1.5rem; border-radius:1.5rem; display:flex; gap:1.5rem; align-items:center;">
+                        <i class="fa-solid fa-file" style="font-size:2rem; color:var(--accent-admin);"></i>
+                        <div style="flex:1;">
+                            <div style="font-weight:800; color:var(--bg-admin);">${file.name}</div>
+                            <div style="font-size:0.8rem; color:var(--text-muted);">Enviado agora</div>
+                        </div>
+                        <a href="${data.fileUrl}" target="_blank" class="btn-action-main" style="padding:0.6rem 1.2rem; font-size:0.75rem; margin:0; text-decoration:none;">Visualizar</a>
+                    </div>`;
+                }
+            } catch(e) {
+                AdminUI.notify('Erro no envio do arquivo.', 'error');
+            }
+        }
+
+        function switchTab(evt, tabId) {
+            const targetContent = document.getElementById(tabId);
+            if (!targetContent) return; 
+
+            document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
+            document.querySelectorAll('.tab-content').forEach(content => content.classList.remove('active'));
+            
+            evt.currentTarget.classList.add('active');
+            targetContent.classList.add('active');
+        }
+
+        // --- Render Consultations ---
+        function addConsultation() {
+            const date = document.getElementById('cons-data').value;
+            const weight = document.getElementById('cons-peso').value;
+            const waist = document.getElementById('cons-cintura').value;
+            const fat = document.getElementById('cons-gordura').value;
+            const notes = document.getElementById('cons-notas').value;
+
+            if(!date) return AdminUI.notify('Data da consulta é obrigatória.', 'error');
+            
+            patientConsultations.push({
+                data: date,
+                peso: weight,
+                cintura: waist,
+                gordura: fat,
+                notas: notes,
+                timestamp: Date.now()
+            });
+
+            // Ordenar por data decrescente
+            patientConsultations.sort((a,b) => new Date(b.data) - new Date(a.data));
+
+            document.getElementById('cons-peso').value = '';
+            document.getElementById('cons-cintura').value = '';
+            document.getElementById('cons-gordura').value = '';
+            document.getElementById('cons-notas').value = '';
+            
+            renderConsultations();
+            AdminUI.notify('Consulta adicionada na lista! Não esqueça de Salvar as Alterações.', 'success');
+        }
+
+        function removeConsultation(ts) {
+            AdminUI.confirm("Excluir Anotação", "Deseja remover essa consulta do histórico?", () => {
+                patientConsultations = patientConsultations.filter(c => c.timestamp != ts);
+                renderConsultations();
+            });
+        }
+
+        function renderConsultations() {
+            const tl = document.getElementById('consultations-timeline');
+            if(patientConsultations.length === 0) {
+                tl.innerHTML = '<p style="color:var(--text-muted); font-size:0.9rem;">Nenhum histórico registrado para este paciente.</p>';
+                return;
+            }
+
+            let html = '';
+            patientConsultations.forEach((c, index) => {
+                // Cálculo de diferença visual (Mock simples com base no registro anterior da lista)
+                let diffBadge = '';
+                if(index < patientConsultations.length - 1 && c.peso) {
+                    const prevPeso = patientConsultations[index+1].peso;
+                    if(prevPeso) {
+                        const diff = (parseFloat(c.peso) - parseFloat(prevPeso)).toFixed(1);
+                        const color = diff <= 0 ? '#2e7d32' : '#d32f2f';
+                        diffBadge = `<span style="background: ${color}22; color:${color}; padding:2px 8px; border-radius:10px; font-size:0.75rem; font-weight:800; margin-left:10px;">${diff > 0 ? '+':''}${diff}kg desde a última</span>`;
+                    }
+                }
+
+                html += `
+                <div style="background:#f9fbf8; border-left:4px solid var(--accent-admin); padding:1.5rem; border-radius:0 1rem 1rem 0; position:relative;">
+                    <div style="display:flex; justify-content:space-between; align-items:flex-start;">
+                        <div>
+                            <div style="font-size:0.8rem; text-transform:uppercase; letter-spacing:1px; color:var(--text-muted); margin-bottom:0.5rem;"><i class="fa-regular fa-calendar" style="margin-right:5px;"></i> ${c.data.split('-').reverse().join('/')}</div>
+                            <div style="font-weight:700; color:var(--bg-admin); font-size:1.1rem; margin-bottom:1rem;">
+                                Peso: ${c.peso ? c.peso+'kg' : '--'} ${diffBadge}
+                                <span style="margin: 0 10px; color:#d4a017;">|</span> Cintura: ${c.cintura ? c.cintura+'cm' : '--'}
+                                <span style="margin: 0 10px; color:#d4a017;">|</span> BF: ${c.gordura ? c.gordura+'%' : '--'}
+                            </div>
+                        </div>
+                        <button onclick="removeConsultation(${c.timestamp})" style="background:none; border:none; color:#d32f2f; cursor:pointer;" title="Remover Histórico"><i class="fa-solid fa-trash"></i></button>
+                    </div>
+                    <p style="color:var(--text-main); font-size:0.95rem; line-height:1.6; margin:0; padding-top:1rem; border-top:1px dashed #eef2eb;">${c.notas || 'Sem anotações complementares.'}</p>
+                </div>
+                `;
+            });
+            tl.innerHTML = html;
+            if(typeof renderOverview === 'function') renderOverview();
+        }
+
+        // --- Render Goals ---
+        function addGoal() {
+            const titulo = document.getElementById('meta-titulo').value;
+            const prazo = document.getElementById('meta-prazo').value;
+
+            if(!titulo) return AdminUI.notify('A descrição da meta é obrigatória.', 'error');
+            
+            patientGoals.push({
+                titulo: titulo,
+                prazo: prazo,
+                concluida: false,
+                timestamp: Date.now()
+            });
+
+            document.getElementById('meta-titulo').value = '';
+            document.getElementById('meta-prazo').value = '';
+            
+            renderGoals();
+            AdminUI.notify('Meta inserida! Não esqueça de Salvar as Alterações.', 'success');
+        }
+
+        function toggleGoal(ts) {
+            const goal = patientGoals.find(g => g.timestamp === ts);
+            if(goal) {
+                goal.concluida = !goal.concluida;
+                renderGoals();
+            }
+        }
+
+        function removeGoal(ts) {
+            patientGoals = patientGoals.filter(g => g.timestamp !== ts);
+            renderGoals();
+        }
+
+        function editGoal(ts) {
+            const goal = patientGoals.find(g => g.timestamp === ts);
+            if(goal) {
+                // Populate the insertion form with current data
+                document.getElementById('meta-titulo').value = goal.titulo;
+                document.getElementById('meta-prazo').value = goal.prazo || '';
+                // Remove the goal from the array so it can be re-added ("Salvar Alterações")
+                patientGoals = patientGoals.filter(g => g.timestamp !== ts);
+                renderGoals();
+                // Scroll up or focus
+                document.getElementById('meta-titulo').focus();
+                AdminUI.notify('Meta movida para o formulário de edição acima.', 'success');
+            }
+        }
+
+        function renderGoals() {
+            const container = document.getElementById('goals-list-container');
+            if(patientGoals.length === 0) {
+                container.innerHTML = '<p style="color:var(--text-muted); font-size:0.9rem;">Nenhuma meta ativa.</p>';
+                return;
+            }
+
+            let html = '';
+            patientGoals.forEach(g => {
+                const checkedClass = g.concluida ? 'done' : '';
+                const checkIcon = g.concluida ? '<i class="fa-solid fa-check"></i>' : '';
+                const textStyle = g.concluida ? 'text-decoration: line-through; opacity: 0.6;' : '';
+
+                html += `
+                <div class="goal-item" style="display:flex; justify-content:space-between; align-items:center;">
+                    <div style="display:flex; align-items:center; gap:1.5rem; flex:1; cursor:pointer;" onclick="toggleGoal(${g.timestamp})">
+                        <div class="goal-check ${checkedClass}">${checkIcon}</div>
+                        <div style="${textStyle}">
+                            <div style="font-weight:800; color:var(--bg-admin);">${g.titulo}</div>
+                            <div style="font-size:0.75rem; color:var(--text-muted);">${g.prazo || 'Sem prazo'}</div>
+                        </div>
+                    </div>
+                    <div style="display:flex; gap:1rem;">
+                        <button onclick="editGoal(${g.timestamp})" style="background:none; border:none; color:var(--text-muted); cursor:pointer; font-size:1rem;" title="Editar Meta"><i class="fa-solid fa-pen"></i></button>
+                        <button onclick="removeGoal(${g.timestamp})" style="background:none; border:none; color:#d32f2f; cursor:pointer; font-size:1rem;" title="Excluir Meta"><i class="fa-solid fa-xmark"></i></button>
+                    </div>
+                </div>
+                `;
+            });
+            container.innerHTML = html;
+            if(typeof renderOverview === 'function') renderOverview();
+        }
+
+        function appendNewGoal(g) {
+            // function to safely handle rendering logic...
+        }
+
+        // --- Render Overview Data ---
+        function renderOverview() {
+            const statusVal = document.getElementById('reg-status').selectedOptions[0]?.text || '--';
+            const vgStatus = document.getElementById('vg-status');
+            vgStatus.innerText = statusVal;
+            vgStatus.style.color = (statusVal.toLowerCase() === 'ativo') ? '#2e7d32' : (statusVal.toLowerCase() === 'alta' ? '#1e88e5' : '#e65100');
+
+            // Peso Atual
+            if (patientConsultations.length > 0) {
+                const head = patientConsultations[0];
+                let diffText = '';
+                if (patientConsultations.length > 1 && head.peso) {
+                    const prev = patientConsultations[1];
+                    if (prev.peso) {
+                        const diff = (parseFloat(head.peso) - parseFloat(prev.peso)).toFixed(1);
+                        const color = diff <= 0 ? '#2e7d32' : '#d32f2f';
+                        diffText = `<span style="color:${color}">${diff > 0 ? '+':''}${diff}kg</span>`;
+                    }
+                }
+                document.getElementById('vg-peso').innerHTML = `${head.peso ? head.peso+'kg' : '--'} <small id="vg-peso-diff" style="font-size:0.8rem;">${diffText}</small>`;
+            } else {
+                document.getElementById('vg-peso').innerHTML = `-- <small id="vg-peso-diff" style="font-size:0.8rem;"></small>`;
+            }
+
+            // Metas Aderência
+            const total = patientGoals.length;
+            if(total > 0) {
+                const feitas = patientGoals.filter(m => m.concluida).length;
+                const pct = Math.round((feitas / total) * 100);
+                document.getElementById('vg-aderencia').innerText = `${pct}%`;
+            } else {
+                document.getElementById('vg-aderencia').innerText = `--`;
+            }
         }
 
         function logout() { document.cookie = 'auth_token=; Max-Age=0; path=/;'; window.location.href = 'login.html'; }
+        
+        // Initialization
+        document.addEventListener('DOMContentLoaded', loadPatientsList);
     </script>
+    <script src="ui.js"></script>
 </body>
 </html>

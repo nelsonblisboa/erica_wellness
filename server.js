@@ -1,5 +1,7 @@
 require('dotenv').config();
 const express = require('express');
+const multer = require('multer');
+const fs = require('fs');
 const path = require('path');
 const cors = require('cors');
 const helmet = require('helmet');
@@ -32,6 +34,30 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname)));
 // Admin specific static files (we'll protect the dashboard routes in logic)
 app.use('/admin', express.static(path.join(__dirname, 'admin')));
+
+// Local DB for extended medical records (as Supabase schema doesn't have the columns yet)
+const recordsDir = path.join(__dirname, 'data');
+if (!fs.existsSync(recordsDir)) fs.mkdirSync(recordsDir);
+const recordsFile = path.join(recordsDir, 'records.json');
+if (!fs.existsSync(recordsFile)) fs.writeFileSync(recordsFile, '{}');
+
+function getRecords() {
+    return JSON.parse(fs.readFileSync(recordsFile, 'utf8'));
+}
+function saveRecords(data) {
+    fs.writeFileSync(recordsFile, JSON.stringify(data, null, 2));
+}
+
+// Uploads directory config
+const uploadsDir = path.join(__dirname, 'uploads');
+if (!fs.existsSync(uploadsDir)) fs.mkdirSync(uploadsDir);
+app.use('/uploads', express.static(uploadsDir));
+
+const storage = multer.diskStorage({
+    destination: (req, file, cb) => cb(null, uploadsDir),
+    filename: (req, file, cb) => cb(null, Date.now() + '-' + file.originalname)
+});
+const upload = multer({ storage: storage });
 
 // --- Routes ---
 
@@ -133,6 +159,82 @@ app.get('/api/admin/patients', authenticateToken, async (req, res) => {
         res.json(data);
     } catch (err) {
         res.status(500).json({ error: 'Erro ao buscar pacientes.' });
+    }
+});
+
+app.get('/api/admin/patients/:id', authenticateToken, async (req, res) => {
+    try {
+        const { data, error } = await supabase.from('patients').select('*').eq('id', req.params.id).single();
+        if (error) throw error;
+        res.json(data);
+    } catch (err) {
+        res.status(500).json({ error: 'Erro ao buscar dados do paciente.' });
+    }
+});
+
+app.put('/api/admin/patients/:id', authenticateToken, async (req, res) => {
+    try {
+        const payload = {
+            full_name: req.body.full_name,
+            birth_date: req.body.birth_date,
+            cpf: req.body.cpf,
+            status: req.body.status,
+            type: req.body.type,
+            phone: req.body.phone,
+            email: req.body.email
+        };
+        // Remove undefined fields
+        Object.keys(payload).forEach(key => payload[key] === undefined && delete payload[key]);
+
+        const { data, error } = await supabase.from('patients').update(payload).eq('id', req.params.id);
+        if (error) throw error;
+        res.json({ message: 'Paciente atualizado com sucesso!' });
+    } catch (err) {
+        res.status(500).json({ error: 'Erro ao atualizar paciente.', details: err.message });
+    }
+});
+
+// Extended Medical Record endpoints (CRUD genérico)
+app.get('/api/admin/patients/:id/record', authenticateToken, (req, res) => {
+    const records = getRecords();
+    res.json(records[req.params.id] || {});
+});
+
+app.put('/api/admin/patients/:id/record', authenticateToken, (req, res) => {
+    const records = getRecords();
+    records[req.params.id] = req.body;
+    saveRecords(records);
+    res.json({ message: 'Prontuário médico estendido salvo com sucesso.' });
+});
+
+app.delete('/api/admin/patients/:id', authenticateToken, async (req, res) => {
+    try {
+        const { error } = await supabase.from('patients').delete().eq('id', req.params.id);
+        if (error) throw error;
+        
+        // Remove extended record totally
+        const records = getRecords();
+        if(records[req.params.id]) {
+            delete records[req.params.id];
+            saveRecords(records);
+        }
+
+        res.json({ message: 'Paciente excluído com sucesso!' });
+    } catch (err) {
+        res.status(500).json({ error: 'Erro ao excluir paciente.', details: err.message });
+    }
+});
+
+// Endpoint para Upload de Exames
+app.post('/api/admin/patients/:id/upload', authenticateToken, upload.single('documento'), async (req, res) => {
+    if (!req.file) return res.status(400).json({ error: 'Nenhum arquivo enviado.' });
+    
+    // In a real scenario, you'd save this path/url to the patient's record in Supabase.
+    // Assuming 'patients' has a jsonb field to store files. If not, this is a simplified stub.
+    try {
+        res.status(200).json({ message: 'Arquivo anexado com sucesso!', fileUrl: '/uploads/' + req.file.filename });
+    } catch(err) {
+        res.status(500).json({ error: 'Erro ao processar o arquivo anexado.' });
     }
 });
 

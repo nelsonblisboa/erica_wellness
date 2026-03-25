@@ -100,55 +100,62 @@
             box-shadow: 0 40px 100px rgba(0,0,0,0.3);
         }
 
-        /* Área de Conteúdo Central - Layout de Máxima Proximidade */
+        /* Área de Conteúdo Central - Layout Editorial */
         .content-area {
             flex-grow: 1;
-            padding: 2.5rem 3.5rem;
+            padding: 3.5rem 4rem;
             overflow-y: auto;
             display: flex;
             flex-direction: column;
-            gap: 0; /* Gap zerado para permitir que os elementos encostem */
+            gap: 4rem; /* Section Gap (DESIGN.md) */
         }
 
-        /* Cabeçalhos de Seção Padronizados - Colagem Estratégica */
-        .section-header { border-bottom: 2.2px solid #f0fde9; padding-bottom: 1.2rem; margin-bottom: 0.5rem; display: flex; flex-direction: column; gap: 0.4rem; align-items: flex-start; width: 100%; }
+        /* Cabeçalhos de Seção Padronizados */
+        .section-header { 
+            display: flex; 
+            flex-direction: column; 
+            gap: 0.5rem; 
+            align-items: flex-start; 
+            width: 100%; 
+            margin-bottom: 0.5rem;
+        }
         
-        /* Espaçamento apenas para a lista inferior */
-        .leads-list-compact { margin-top: 4rem; } 
+        .leads-list-compact { margin-top: 1rem; } 
 
-        .section-header h1, .section-header h2 { font-family: 'Noto Serif', serif; font-size: 1.8rem; margin: 0; color: var(--bg-admin); }
-        .section-header p { color: var(--text-muted); font-size: 0.75rem; margin: 0; text-transform: uppercase; letter-spacing: 1.8px; font-weight: 800; }
+        .section-header h1, .section-header h2 { font-family: 'Noto Serif', serif; font-size: 2.8rem; margin: 0; color: var(--bg-admin); letter-spacing: -0.02em; }
+        .section-header p { color: var(--accent-admin); font-size: 0.85rem; margin: 0; text-transform: uppercase; letter-spacing: 2px; font-weight: 800; font-family: 'Manrope', sans-serif; }
 
         /* Grid de Estatísticas Com Mais Visibilidade */
-        .analytics-grid { display: grid; grid-template-columns: 2.8fr 1fr; gap: 2rem; align-items: flex-start; width: 100%; }
+        .analytics-grid { display: grid; grid-template-columns: 2fr 1fr; gap: 2rem; align-items: stretch; width: 100%; }
 
         .chart-card {
-            background: #2a553c; /* Verde Floresta Profundo */
-            padding: 3rem; 
-            border-radius: 3rem;
+            background: #ebf8e3; /* surface-container-low */
+            padding: 2.5rem 3rem; 
+            border-radius: 2rem;
             display: flex;
             flex-direction: column;
-            gap: 2rem;
-            color: white; 
-            box-shadow: 0 20px 60px rgba(0,0,0,0.2);
-            min-height: 480px;
+            gap: 1.5rem;
+            color: var(--text-main); 
+            min-height: 400px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.03);
+            border-top-right-radius: 4rem; /* Arched element */
         }
 
-        .chart-main-val { font-size: 3.2rem; font-weight: 800; font-family: 'Noto Serif'; color: #f9fbf8; margin: 1rem 0; display: flex; align-items: center; gap: 1.5rem; }
-        .chart-bars { height: 180px; display: flex; align-items: flex-end; justify-content: space-between; gap: 12px; padding-top: 2rem; }
-        .bar-expert { flex: 1; background: rgba(255,255,255,0.1); border-radius: 8px; transition: 0.4s; }
-        .bar-expert.primary { background: var(--accent-admin); }
+        .chart-main-val { font-size: 3.5rem; font-weight: 800; font-family: 'Noto Serif'; color: var(--bg-admin); margin: 0.5rem 0; display: flex; align-items: center; gap: 1.5rem; letter-spacing: -0.02em; }
+        .chart-bars { height: 180px; display: flex; align-items: flex-end; justify-content: space-between; gap: 16px; padding-top: 1rem; }
+        .bar-expert { flex: 1; background: rgba(38, 77, 54, 0.1); border-radius: 8px; transition: 0.4s; }
+        .bar-expert.primary { background: var(--bg-admin); }
 
         .stats-side-grid { display: flex; flex-direction: column; gap: 2rem; }
-        .mini-card { background: #2a553c; padding: 2.5rem; border-radius: 2.8rem; display: flex; flex-direction: column; justify-content: center; align-items: flex-start; color: white; box-shadow: 0 20px 50px rgba(0,0,0,0.15); }
-        .mini-card h4 { font-size: 0.72rem; color: rgba(255,255,255,0.5); text-transform: uppercase; letter-spacing: 2px; margin: 0 0 1.2rem 0; font-weight: 800; }
-        .mini-card .val { font-size: 2.4rem; font-weight: 800; font-family: 'Noto Serif'; color: var(--accent-admin); }
+        .mini-card { background: #ffffff; padding: 2rem 2.5rem; border-radius: 2rem; display: flex; flex-direction: column; justify-content: center; align-items: flex-start; color: var(--text-main); box-shadow: 0 10px 40px rgba(0,0,0,0.04); }
+        .mini-card h4 { font-size: 0.75rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 1.5px; margin: 0 0 0.8rem 0; font-weight: 800; }
+        .mini-card .val { font-size: 2.5rem; font-weight: 800; font-family: 'Noto Serif'; color: var(--accent-admin); letter-spacing: -0.02em; }
 
         /* Tabela Com Melhor Espaçamento */
-        .table-card { background: var(--card-inner); border-radius: 3rem; padding: 2.5rem; }
+        .table-card { background: #ebf8e3; border-radius: 2rem; padding: 3rem; border-top-right-radius: 4rem; }
         table { width: 100%; border-collapse: collapse; }
-        th { text-align: left; font-size: 0.75rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 1.8px; padding-bottom: 1.8rem; border-bottom: 2px solid #eef2eb; }
-        td { padding: 1.5rem 0; font-size: 1rem; border-bottom: 1px solid #f9fbf899; text-align: left; }
+        th { text-align: left; font-size: 0.75rem; color: var(--accent-admin); text-transform: uppercase; letter-spacing: 1.5px; padding-bottom: 2rem; border-bottom: 2px solid rgba(0,0,0,0.05); font-weight: 800; }
+        td { padding: 1.8rem 0; font-size: 1.05rem; border-bottom: 1px solid rgba(0,0,0,0.03); text-align: left; color: var(--bg-admin); font-weight: 600; }
 
         @media (max-width: 1400px) { }
     </style>
@@ -185,22 +192,12 @@
             </div>
 
             <div class="analytics-grid">
-                <div class="chart-main-card">
-                    <div class="chart-header">
-                        <span style="font-size:0.85rem; color:var(--text-muted); font-weight:800; text-transform:uppercase; letter-spacing:1.5px;">Aquisição Semanal Escolhida</span>
-                        <div style="display: flex; align-items: baseline; gap:15px; margin-top:8px;">
-                            <div class="value">648</div>
-                            <span style="color:#2e7d32; font-weight:700; font-size:0.95rem; background:#e7f5ed; padding:5px 15px; border-radius:12px;">+12.4%</span>
-                        </div>
-                    </div>
-                    <div class="bar-chart-mockup">
-                        <div style="flex:1; background:rgba(255,255,255,0.1); height:45%; border-radius:8px;"></div>
                 <!-- Gráfico Principal: Aquisição Semanal -->
                 <div class="chart-card">
-                    <p>Métrica de Leads Totais</p>
+                    <p style="font-size:0.85rem; color:var(--text-muted); font-weight:800; text-transform:uppercase; letter-spacing:1.5px; margin:0;">Métrica de Leads Totais</p>
                     <div class="chart-main-val">
                         <span id="leads-count">0</span>
-                        <div class="percentage-badge"><i class="fa-solid fa-arrow-up"></i> Live Cloud</div>
+                        <div class="percentage-badge" style="font-size: 1rem; color: var(--accent-admin); background: rgba(155, 129, 85, 0.2); padding: 5px 15px; border-radius: 20px;"><i class="fa-solid fa-arrow-up"></i> Live Cloud</div>
                     </div>
                     <div class="chart-bars">
                         <div class="bar-expert" style="height: 35%;"></div>
@@ -293,5 +290,6 @@
         // Inicializar com Supabase Dados
         updateDashboard();
     </script>
+    <script src="ui.js"></script>
 </body>
 </html>
